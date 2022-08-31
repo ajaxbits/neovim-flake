@@ -1,9 +1,6 @@
-{
-  pkgs,
-  inputs,
-  plugins,
-  ...
-}: final: prev: let
+{ pkgs, inputs, plugins, ... }:
+final: prev:
+let
   inherit (prev.vimUtils) buildVimPluginFrom2Nix;
 
   treesitterGrammars = prev.tree-sitter.withPlugins (p: [
@@ -21,7 +18,6 @@
     p.tree-sitter-css
     p.tree-sitter-graphql
     p.tree-sitter-json
-    pkgs.tree-sitter-hare
   ]);
 
   buildPlug = name:
@@ -29,22 +25,15 @@
       pname = name;
       version = "master";
       src = builtins.getAttr name inputs;
-      postPatch =
-        if (name == "nvim-treesitter")
-        then ''
-          rm -r parser
-          ln -s ${treesitterGrammars} parser
-          mkdir queries/hare
-          ln -s ${pkgs.tree-sitter-hare}/queries/* queries/hare
-        ''
-        else "";
+      postPatch = if (name == "nvim-treesitter") then ''
+        rm -r parser
+        ln -s ${treesitterGrammars} parser
+      '' else
+        "";
     };
 in {
-  neovimPlugins =
-    builtins.listToAttrs
-    (map (name: {
-        inherit name;
-        value = buildPlug name;
-      })
-      plugins);
+  neovimPlugins = builtins.listToAttrs (map (name: {
+    inherit name;
+    value = buildPlug name;
+  }) plugins);
 }
