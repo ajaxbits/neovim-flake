@@ -55,6 +55,11 @@ in {
             then sqls-nvim
             else null
           )
+          (
+            if cfg.hcl
+            then vim-hcl
+            else null
+          )
         ]
         ++ (
           if cfg.rust.enable
