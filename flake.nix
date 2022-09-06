@@ -211,6 +211,11 @@
       flake = false;
     };
 
+    vim-hcl = {
+      url = "github: jvirtanen/vim-hcl";
+      flake = false;
+    };
+
     tree-sitter-hare = {
       url = "git+https://git.sr.ht/~ecmma/tree-sitter-hare";
       flake = false;
@@ -264,6 +269,7 @@
       "rust-tools"
       "onedark"
       "hare-vim"
+      "vim-hcl"
       "kommentary"
     ];
 
@@ -321,10 +327,10 @@
             python = true;
             clang = true;
             sql = true;
-            hcl = true;
             ts = true;
             go = true;
             hare = true;
+            hcl = true;
           };
           vim.visuals = {
             enable = true;
