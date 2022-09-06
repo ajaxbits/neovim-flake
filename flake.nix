@@ -212,7 +212,7 @@
     };
 
     vim-hcl = {
-      url = "github: jvirtanen/vim-hcl";
+      url = "github:jvirtanen/vim-hcl";
       flake = false;
     };
 
