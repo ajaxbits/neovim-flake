@@ -32,6 +32,7 @@ in {
     go = mkEnableOption "Go language LSP";
     ts = mkEnableOption "TS language LSP";
     hare = mkEnableOption "Hare plugin (not LSP)";
+    hcl = mkEnableOption "HCL plugin (not LSP)";
   };
 
   config = mkIf cfg.enable (
