@@ -81,7 +81,7 @@
 
     # Tablines
     nvim-bufferline-lua = {
-      url = "github:akinsho/nvim-bufferline.lua?ref=v1.2.0";
+      url = "github:akinsho/nvim-bufferline.lua?ref=v3.0.1";
       flake = false;
     };
 
@@ -200,6 +200,12 @@
       flake = false;
     };
 
+    # Tidal cycles
+    tidalcycles = {
+      url = "github:mitchmindtree/tidalcycles.nix";
+      inputs.vim-tidal-src.url = "github:tidalcycles/vim-tidal";
+    };
+
     # Plenary (required by crates-nvim)
     plenary-nvim = {
       url = "github:nvim-lua/plenary.nvim";
@@ -222,95 +228,75 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
+  outputs = { nixpkgs, flake-utils, ... }@inputs:
+    let
+      system = "x86_64-linux";
 
-    # Plugin must be same as input name
-    plugins = [
-      "nvim-treesitter-context"
-      "gitsigns-nvim"
-      "plenary-nvim"
-      "nvim-lspconfig"
-      "nvim-treesitter"
-      "lspsaga"
-      "lspkind"
-      "nvim-lightbulb"
-      "lsp-signature"
-      "nvim-tree-lua"
-      "nvim-bufferline-lua"
-      "lualine"
-      "nvim-compe"
-      "nvim-autopairs"
-      "nvim-ts-autotag"
-      "nvim-web-devicons"
-      "tokyonight"
-      "bufdelete-nvim"
-      "nvim-cmp"
-      "cmp-nvim-lsp"
-      "cmp-buffer"
-      "cmp-vsnip"
-      "cmp-path"
-      "cmp-treesitter"
-      "crates-nvim"
-      "vim-vsnip"
-      "nvim-code-action-menu"
-      "trouble"
-      "null-ls"
-      "which-key"
-      "indent-blankline"
-      "nvim-cursorline"
-      "sqls-nvim"
-      "glow-nvim"
-      "telescope"
-      "rust-tools"
-      "onedark"
-      "hare-vim"
-      "vim-hcl"
-      "kommentary"
-    ];
-
-    pluginOverlay = lib.buildPluginOverlay;
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {allowUnfree = true;};
-      overlays = [
-        pluginOverlay
-        (final: prev: {
-          rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
-        })
+      # Plugin must be same as input name
+      plugins = [
+        "nvim-treesitter-context"
+        "gitsigns-nvim"
+        "plenary-nvim"
+        "nvim-lspconfig"
+        "nvim-treesitter"
+        "lspsaga"
+        "lspkind"
+        "nvim-lightbulb"
+        "lsp-signature"
+        "nvim-tree-lua"
+        "nvim-bufferline-lua"
+        "lualine"
+        "nvim-compe"
+        "nvim-autopairs"
+        "nvim-ts-autotag"
+        "nvim-web-devicons"
+        "tokyonight"
+        "bufdelete-nvim"
+        "nvim-cmp"
+        "cmp-nvim-lsp"
+        "cmp-buffer"
+        "cmp-vsnip"
+        "cmp-path"
+        "cmp-treesitter"
+        "crates-nvim"
+        "vim-vsnip"
+        "nvim-code-action-menu"
+        "trouble"
+        "null-ls"
+        "which-key"
+        "indent-blankline"
+        "nvim-cursorline"
+        "sqls-nvim"
+        "glow-nvim"
+        "telescope"
+        "rust-tools"
+        "onedark"
+        "hare-vim"
+        "vim-hcl"
+        "kommentary"
       ];
-    };
 
-    lib = import ./lib {inherit pkgs inputs plugins;};
+      pluginOverlay = lib.buildPluginOverlay;
 
-    neovimBuilder = lib.neovimBuilder;
-  in rec {
-    apps.${system} = rec {
-      nvim = {
-        type = "app";
-        program = "${packages.${system}.default}/bin/nvim";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = { allowUnfree = true; };
+        overlays = [
+          pluginOverlay
+          inputs.tidalcycles.overlays.default
+          (final: prev: {
+            rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
+          })
+        ];
       };
 
-      default = nvim;
-    };
+      lib = import ./lib { inherit pkgs inputs plugins; };
 
-    devShells.${system}.default =
-      pkgs.mkShell {buildInputs = [packages.${system}.neovimAJ];};
+      neovimBuilder = lib.neovimBuilder;
 
-    overlays.default = final: prev: {
-      inherit neovimBuilder;
-      neovimAJ = packages.${system}.neovimJD;
-      neovimPlugins = pkgs.neovimPlugins;
-    };
+      tidalConfig = { config = { vim.tidal.enable = true; }; };
 
-    packages.${system} = rec {
-      default = neovimAJ;
-      neovimAJ = neovimBuilder {
+      configBuilder = isMaximal: {
         config = {
           vim.viAlias = false;
           vim.vimAlias = true;
@@ -322,15 +308,15 @@
             nvimCodeActionMenu.enable = true;
             trouble.enable = true;
             lspSignature.enable = true;
-            rust.enable = true;
             nix = true;
-            python = true;
-            clang = true;
-            sql = true;
-            ts = true;
-            go = true;
-            hare = true;
-            hcl = true;
+            rust.enable = isMaximal;
+            python = isMaximal;
+            clang.enable = isMaximal;
+            sql = isMaximal;
+            ts = isMaximal;
+            go = isMaximal;
+            hare = isMaximal;
+            hcl = isMaximal;
           };
           vim.visuals = {
             enable = true;
@@ -365,14 +351,13 @@
           vim.tabline.nvimBufferline.enable = true;
           vim.treesitter = {
             enable = true;
-            autotagHtml = true;
             context.enable = true;
           };
           vim.keys = {
             enable = true;
             whichKey.enable = true;
           };
-          vim.telescope = {enable = true;};
+          vim.telescope = { enable = true; };
           vim.markdown = {
             enable = true;
             glow.enable = true;
@@ -383,6 +368,38 @@
           };
         };
       };
+    in rec {
+      apps.${system} = rec {
+        nvim = {
+          type = "app";
+          program = "${packages.${system}.default}/bin/nvim";
+        };
+        tidal = {
+          type = "app";
+          program = "${packages.${system}.neovimTidal}/bin/nvim";
+        };
+
+        default = nvim;
+      };
+
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          buildInputs = [ (neovimBuilder (configBuilder false)) ];
+        };
+        tidal = pkgs.mkShell { buildInputs = [ (neovimBuilder tidalConfig) ]; };
+      };
+
+      overlays.default = final: prev: {
+        inherit neovimBuilder;
+        neovimAJ = packages.${system}.neovimAJ;
+        neovimTidal = packages.${system}.neovimTidal;
+        neovimPlugins = pkgs.neovimPlugins;
+      };
+
+      packages.${system} = rec {
+        default = neovimAJ;
+        neovimAJ = neovimBuilder (configBuilder true);
+        neovimTidal = neovimBuilder tidalConfig;
+      };
     };
-  };
 }
