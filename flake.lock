@@ -223,6 +223,22 @@
         "type": "github"
       }
     },
+    "lazygit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667647478,
+        "narHash": "sha256-xiV71zVBHvoC0SGCXAtsL3HA3XUkSDyD402G2E4Sicc=",
+        "owner": "kdheepak",
+        "repo": "lazygit.nvim",
+        "rev": "32bffdebe273e571588f25c8a708ca7297928617",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kdheepak",
+        "repo": "lazygit.nvim",
+        "type": "github"
+      }
+    },
     "leap": {
       "flake": false,
       "locked": {
@@ -710,9 +726,11 @@
         "flake-utils": "flake-utils",
         "gitsigns-nvim": "gitsigns-nvim",
         "glow-nvim": "glow-nvim",
+        "gruvbox": "gruvbox",
         "hare-vim": "hare-vim",
         "indent-blankline": "indent-blankline",
         "kommentary": "kommentary",
+        "lazygit": "lazygit",
         "leap": "leap",
         "leap-ast": "leap-ast",
         "lsp-signature": "lsp-signature",

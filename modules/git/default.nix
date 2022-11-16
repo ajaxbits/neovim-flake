@@ -7,5 +7,6 @@
   imports = [
     ./config.nix
     ./git.nix
+    ./lazygit.nix
   ];
 }

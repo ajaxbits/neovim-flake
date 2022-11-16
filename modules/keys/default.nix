@@ -3,4 +3,4 @@
   lib,
   pkgs,
   ...
-}: {imports = [./which-key.nix ./leap.nix];}
+}: {imports = [./which-key.nix ./leap.nix ./kommentary.nix];}

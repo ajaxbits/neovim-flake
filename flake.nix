@@ -234,6 +234,11 @@
       url = "git+https://git.sr.ht/~ecmma/tree-sitter-hare";
       flake = false;
     };
+
+    lazygit = {
+      url = "github:kdheepak/lazygit.nvim";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -287,6 +292,7 @@
       "hare-vim"
       "vim-hcl"
       "kommentary"
+      "lazygit"
     ];
 
     pluginOverlay = lib.buildPluginOverlay;
@@ -360,7 +366,10 @@
           enable = true;
           type = "nvim-cmp";
         };
-        vim.filetree.nvimTreeLua.enable = true;
+        vim.filetree.nvimTreeLua = {
+          enable = true;
+          resizeOnFileOpen = true;
+        };
         vim.tabline.nvimBufferline.enable = true;
         vim.treesitter = {
           enable = true;
@@ -370,6 +379,7 @@
           enable = true;
           whichKey.enable = true;
           leap.enable = true;
+          kommentary.enable = true;
         };
         vim.telescope = {enable = true;};
         vim.markdown = {
@@ -379,6 +389,7 @@
         vim.git = {
           enable = true;
           gitsigns.enable = true;
+          lazygit.enable = true;
         };
       };
     };
