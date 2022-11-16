@@ -158,9 +158,12 @@
       url = "github:folke/tokyonight.nvim";
       flake = false;
     };
-
     onedark = {
       url = "github:navarasu/onedark.nvim";
+      flake = false;
+    };
+    gruvbox = {
+      url = "github:ellisonleao/gruvbox.nvim";
       flake = false;
     };
 
@@ -289,6 +292,7 @@
       "telescope"
       "rust-tools"
       "onedark"
+      "gruvbox"
       "hare-vim"
       "vim-hcl"
       "kommentary"
@@ -358,8 +362,7 @@
         };
         vim.theme = {
           enable = true;
-          name = "onedark";
-          style = "darker";
+          name = "gruvbox";
         };
         vim.autopairs.enable = true;
         vim.autocomplete = {

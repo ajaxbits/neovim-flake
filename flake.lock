@@ -175,6 +175,22 @@
         "type": "github"
       }
     },
+    "gruvbox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668447145,
+        "narHash": "sha256-rbhIFOd+pbcPuf6wdcgYjelo+uuKyWpV6aGGmDjFa2Q=",
+        "owner": "ellisonleao",
+        "repo": "gruvbox.nvim",
+        "rev": "5ac400bbd7bbe5d5911a79c45347df6d3afd388e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ellisonleao",
+        "repo": "gruvbox.nvim",
+        "type": "github"
+      }
+    },
     "hare-vim": {
       "flake": false,
       "locked": {

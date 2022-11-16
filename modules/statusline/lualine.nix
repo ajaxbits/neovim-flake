@@ -31,9 +31,8 @@ in {
           "codedark"
           "dracula"
           "everforest"
-          "gruvbox"
           "gruvbox_light"
-          "gruvbox_material"
+          "gruvbox-material"
           "horizon"
           "iceberg_dark"
           "iceberg_light"
@@ -56,8 +55,8 @@ in {
           "wombat"
         ]
         ++ (
-          if config.vim.theme.name == "tokyonight"
-          then ["tokyonight"]
+          if config.vim.theme.name == "gruvbox"
+          then ["gruvbox-material"]
           else ["onedark"]
         )
       );
@@ -165,7 +164,7 @@ in {
 
       vim.startPlugins = with pkgs.neovimPlugins; [lualine];
       vim.luaConfigRC = ''
-        require'lualine'.setup {
+        require('lualine').setup{
           options = {
             icons_enabled = ${
           if cfg.icons
