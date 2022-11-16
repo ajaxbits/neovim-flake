@@ -221,6 +221,38 @@
         "type": "github"
       }
     },
+    "leap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667950522,
+        "narHash": "sha256-J5CyNJdj8gWLAa/0u5woACm81BG42g1DgSCkhOOvsvE=",
+        "owner": "ggandor",
+        "repo": "leap.nvim",
+        "rev": "c19e974cfd9d52dc5070ec7b68183da39702c877",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggandor",
+        "repo": "leap.nvim",
+        "type": "github"
+      }
+    },
+    "leap-ast": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1665424688,
+        "narHash": "sha256-6ZbO0ND/JSoJVXSLNCfQzWgXoiUYJut2OGtAcpvPaMk=",
+        "owner": "ggandor",
+        "repo": "leap-ast.nvim",
+        "rev": "1a21b70505ebb868a1e196c0d63797e1426b53a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggandor",
+        "repo": "leap-ast.nvim",
+        "type": "github"
+      }
+    },
     "lsp-signature": {
       "flake": false,
       "locked": {
@@ -679,6 +711,8 @@
         "hare-vim": "hare-vim",
         "indent-blankline": "indent-blankline",
         "kommentary": "kommentary",
+        "leap": "leap",
+        "leap-ast": "leap-ast",
         "lsp-signature": "lsp-signature",
         "lspkind": "lspkind",
         "lspsaga": "lspsaga",
