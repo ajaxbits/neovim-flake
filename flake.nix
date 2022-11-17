@@ -200,6 +200,10 @@
       url = "github:ggandor/leap-ast.nvim";
       flake = false;
     };
+    leap-spooky = {
+      url = "github:ggandor/leap-spooky.nvim";
+      flake = false;
+    };
     which-key = {
       url = "github:folke/which-key.nvim";
       flake = false;
@@ -285,6 +289,7 @@
       "which-key"
       "leap"
       "leap-ast"
+      "leap-spooky"
       "indent-blankline"
       "nvim-cursorline"
       "sqls-nvim"
@@ -381,7 +386,11 @@
         vim.keys = {
           enable = true;
           whichKey.enable = true;
-          leap.enable = true;
+          leap = {
+            enable = true;
+            ast = true;
+            spooky = true;
+          };
           kommentary.enable = true;
         };
         vim.telescope = {enable = true;};

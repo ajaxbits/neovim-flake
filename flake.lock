@@ -287,6 +287,22 @@
         "type": "github"
       }
     },
+    "leap-spooky": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667767696,
+        "narHash": "sha256-clWUcCf6VrfFBkoHE1izEQYfzc/oBxK4XFvIrEq0XdQ=",
+        "owner": "ggandor",
+        "repo": "leap-spooky.nvim",
+        "rev": "482a945db806a08f37baab8e4a62e7d86710379d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggandor",
+        "repo": "leap-spooky.nvim",
+        "type": "github"
+      }
+    },
     "lsp-signature": {
       "flake": false,
       "locked": {
@@ -749,6 +765,7 @@
         "lazygit": "lazygit",
         "leap": "leap",
         "leap-ast": "leap-ast",
+        "leap-spooky": "leap-spooky",
         "lsp-signature": "lsp-signature",
         "lspkind": "lspkind",
         "lspsaga": "lspsaga",
