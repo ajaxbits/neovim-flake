@@ -358,7 +358,7 @@
         };
         vim.statusline.lualine = {
           enable = true;
-          theme = "onedark";
+          theme = "gruvbox";
         };
         vim.theme = {
           enable = true;

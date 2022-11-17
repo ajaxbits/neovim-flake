@@ -56,7 +56,7 @@ in {
         ]
         ++ (
           if config.vim.theme.name == "gruvbox"
-          then ["gruvbox-material"]
+          then ["gruvbox"]
           else ["onedark"]
         )
       );
