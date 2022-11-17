@@ -306,6 +306,7 @@
         "hare-vim"
         "vim-hcl"
         "kommentary"
+        "todo-comments"
         "lazygit"
       ];
 
@@ -340,6 +341,7 @@
             lspsaga.enable = false;
             nvimCodeActionMenu.enable = true;
             trouble.enable = true;
+            todo-comments.enable = true;
             lspSignature.enable = true;
             nix = true;
             rust.enable = isMaximal;
