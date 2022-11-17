@@ -2,6 +2,7 @@
   description = "Alex's Neovim Configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
 
     # LSP plugins
     nvim-lspconfig = {
@@ -253,190 +254,188 @@
     flake-utils,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
-
-    # Plugin must be same as input name
-    plugins = [
-      "nvim-treesitter-context"
-      "gitsigns-nvim"
-      "plenary-nvim"
-      "nvim-lspconfig"
-      "nvim-treesitter"
-      "lspsaga"
-      "lspkind"
-      "nvim-lightbulb"
-      "lsp-signature"
-      "nvim-tree-lua"
-      "nvim-bufferline-lua"
-      "lualine"
-      "nvim-compe"
-      "nvim-autopairs"
-      "nvim-ts-autotag"
-      "nvim-web-devicons"
-      "tokyonight"
-      "bufdelete-nvim"
-      "nvim-cmp"
-      "cmp-nvim-lsp"
-      "cmp-buffer"
-      "cmp-vsnip"
-      "cmp-path"
-      "cmp-treesitter"
-      "crates-nvim"
-      "vim-vsnip"
-      "nvim-code-action-menu"
-      "trouble"
-      "null-ls"
-      "which-key"
-      "leap"
-      "leap-ast"
-      "leap-spooky"
-      "indent-blankline"
-      "nvim-cursorline"
-      "sqls-nvim"
-      "glow-nvim"
-      "telescope"
-      "rust-tools"
-      "onedark"
-      "gruvbox"
-      "hare-vim"
-      "vim-hcl"
-      "kommentary"
-      "lazygit"
+    configuredSystems = with flake-utils.lib.system; [
+      "x86_64-linux"
+      "aarch64-darwin"
     ];
-
-    pluginOverlay = lib.buildPluginOverlay;
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {allowUnfree = true;};
-      overlays = [
-        pluginOverlay
-        inputs.tidalcycles.overlays.default
-        (final: prev: {
-          rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
-        })
+  in
+    flake-utils.lib.eachSystem configuredSystems (system: let
+      # Plugin must be same as input name
+      plugins = [
+        "nvim-treesitter-context"
+        "gitsigns-nvim"
+        "plenary-nvim"
+        "nvim-lspconfig"
+        "nvim-treesitter"
+        "lspsaga"
+        "lspkind"
+        "nvim-lightbulb"
+        "lsp-signature"
+        "nvim-tree-lua"
+        "nvim-bufferline-lua"
+        "lualine"
+        "nvim-compe"
+        "nvim-autopairs"
+        "nvim-ts-autotag"
+        "nvim-web-devicons"
+        "tokyonight"
+        "bufdelete-nvim"
+        "nvim-cmp"
+        "cmp-nvim-lsp"
+        "cmp-buffer"
+        "cmp-vsnip"
+        "cmp-path"
+        "cmp-treesitter"
+        "crates-nvim"
+        "vim-vsnip"
+        "nvim-code-action-menu"
+        "trouble"
+        "null-ls"
+        "which-key"
+        "leap"
+        "leap-ast"
+        "leap-spooky"
+        "indent-blankline"
+        "nvim-cursorline"
+        "sqls-nvim"
+        "glow-nvim"
+        "telescope"
+        "rust-tools"
+        "onedark"
+        "gruvbox"
+        "hare-vim"
+        "vim-hcl"
+        "kommentary"
+        "lazygit"
       ];
-    };
 
-    lib = import ./lib {inherit pkgs inputs plugins;};
+      pluginOverlay = lib.buildPluginOverlay;
 
-    neovimBuilder = lib.neovimBuilder;
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {allowUnfree = true;};
+        overlays = [
+          pluginOverlay
+          inputs.tidalcycles.overlays.default
+          (final: prev: {
+            rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
+          })
+        ];
+      };
 
-    tidalConfig = {config = {vim.tidal.enable = true;};};
+      lib = import ./lib {inherit pkgs inputs plugins;};
 
-    configBuilder = isMaximal: {
-      config = {
-        vim.viAlias = false;
-        vim.vimAlias = true;
-        vim.lsp = {
-          enable = true;
-          formatOnSave = true;
-          lightbulb.enable = true;
-          lspsaga.enable = false;
-          nvimCodeActionMenu.enable = true;
-          trouble.enable = true;
-          lspSignature.enable = true;
-          nix = true;
-          rust.enable = isMaximal;
-          python = isMaximal;
-          clang.enable = isMaximal;
-          sql = isMaximal;
-          ts = isMaximal;
-          go = isMaximal;
-          hare = isMaximal;
-          hcl = isMaximal;
-        };
-        vim.visuals = {
-          enable = true;
-          nvimWebDevicons.enable = true;
-          lspkind.enable = true;
-          indentBlankline = {
+      neovimBuilder = lib.neovimBuilder;
+
+      tidalConfig = {config = {vim.tidal.enable = true;};};
+
+      configBuilder = isMaximal: {
+        config = {
+          vim.viAlias = false;
+          vim.vimAlias = true;
+          vim.lsp = {
             enable = true;
-            fillChar = "";
-            eolChar = "";
-            showCurrContext = true;
+            formatOnSave = true;
+            lightbulb.enable = true;
+            lspsaga.enable = false;
+            nvimCodeActionMenu.enable = true;
+            trouble.enable = true;
+            lspSignature.enable = true;
+            nix = true;
+            rust.enable = isMaximal;
+            python = isMaximal;
+            clang.enable = isMaximal;
+            sql = isMaximal;
+            ts = isMaximal;
+            go = isMaximal;
+            hare = isMaximal;
+            hcl = isMaximal;
           };
-          cursorWordline = {
+          vim.visuals = {
             enable = true;
-            lineTimeout = 0;
+            nvimWebDevicons.enable = true;
+            lspkind.enable = true;
+            indentBlankline = {
+              enable = true;
+              fillChar = "";
+              eolChar = "";
+              showCurrContext = true;
+            };
+            cursorWordline = {
+              enable = true;
+              lineTimeout = 0;
+            };
           };
-        };
-        vim.statusline.lualine = {
-          enable = true;
-          theme = "gruvbox";
-        };
-        vim.theme = {
-          enable = true;
-          name = "gruvbox";
-        };
-        vim.autopairs.enable = true;
-        vim.autocomplete = {
-          enable = true;
-          type = "nvim-cmp";
-        };
-        vim.filetree.nvimTreeLua = {
-          enable = true;
-          resizeOnFileOpen = true;
-        };
-        vim.tabline.nvimBufferline.enable = true;
-        vim.treesitter = {
-          enable = true;
-          context.enable = true;
-        };
-        vim.keys = {
-          enable = true;
-          whichKey.enable = true;
-          leap = {
+          vim.statusline.lualine = {
             enable = true;
-            ast = true;
-            spooky = true;
+            theme = "gruvbox";
           };
-          kommentary.enable = true;
+          vim.theme = {
+            enable = true;
+            name = "gruvbox";
+          };
+          vim.autopairs.enable = true;
+          vim.autocomplete = {
+            enable = true;
+            type = "nvim-cmp";
+          };
+          vim.filetree.nvimTreeLua = {
+            enable = true;
+            resizeOnFileOpen = true;
+          };
+          vim.tabline.nvimBufferline.enable = true;
+          vim.treesitter = {
+            enable = true;
+            context.enable = true;
+          };
+          vim.keys = {
+            enable = true;
+            whichKey.enable = true;
+            leap = {
+              enable = true;
+              ast = true;
+              spooky = true;
+            };
+            kommentary.enable = true;
+          };
+          vim.telescope = {enable = true;};
+          vim.markdown = {
+            enable = true;
+            glow.enable = true;
+          };
+          vim.git = {
+            enable = true;
+            gitsigns.enable = true;
+            lazygit.enable = true;
+          };
         };
-        vim.telescope = {enable = true;};
-        vim.markdown = {
-          enable = true;
-          glow.enable = true;
+      };
+    in rec {
+      apps = rec {
+        nvim = flake-utils.lib.mkApp {
+          drv = packages.default;
         };
-        vim.git = {
-          enable = true;
-          gitsigns.enable = true;
-          lazygit.enable = true;
+        default = nvim;
+      };
+
+      devShells = {
+        default = pkgs.mkShell {
+          buildInputs = [(neovimBuilder (configBuilder false))];
         };
-      };
-    };
-  in rec {
-    apps.${system} = rec {
-      nvim = {
-        type = "app";
-        program = "${packages.${system}.default}/bin/nvim";
-      };
-      tidal = {
-        type = "app";
-        program = "${packages.${system}.neovimTidal}/bin/nvim";
+        tidal = pkgs.mkShell {buildInputs = [(neovimBuilder tidalConfig)];};
       };
 
-      default = nvim;
-    };
-
-    devShells.${system} = {
-      default = pkgs.mkShell {
-        buildInputs = [(neovimBuilder (configBuilder false))];
+      overlays.default = final: prev: {
+        inherit neovimBuilder;
+        neovimAJ = packages.${system}.neovimAJ;
+        neovimTidal = packages.${system}.neovimTidal;
+        neovimPlugins = pkgs.neovimPlugins;
       };
-      tidal = pkgs.mkShell {buildInputs = [(neovimBuilder tidalConfig)];};
-    };
 
-    overlays.default = final: prev: {
-      inherit neovimBuilder;
-      neovimAJ = packages.${system}.neovimAJ;
-      neovimTidal = packages.${system}.neovimTidal;
-      neovimPlugins = pkgs.neovimPlugins;
-    };
-
-    packages.${system} = rec {
-      default = neovimAJ;
-      neovimAJ = neovimBuilder (configBuilder true);
-      neovimTidal = neovimBuilder tidalConfig;
-    };
-  };
+      packages = flake-utils.lib.flattenTree rec {
+        default = neovimAJ;
+        neovimAJ = neovimBuilder (configBuilder true);
+        neovimTidal = neovimBuilder tidalConfig;
+      };
+    });
 }
