@@ -91,6 +91,10 @@
       url = "github:hoob3rt/lualine.nvim";
       flake = false;
     };
+    lualine-lsp-progress = {
+      url = "github:arkav/lualine-lsp-progress";
+      flake = false;
+    };
 
     # Autocompletes
     nvim-compe = {
@@ -268,6 +272,7 @@
         "nvim-tree-lua"
         "nvim-bufferline-lua"
         "lualine"
+        "lualine-lsp-progress"
         "nvim-compe"
         "nvim-autopairs"
         "nvim-ts-autotag"
@@ -362,6 +367,8 @@
           vim.statusline.lualine = {
             enable = true;
             theme = "gruvbox";
+            icons = true;
+            lsp-progress = true;
           };
           vim.theme = {
             enable = true;

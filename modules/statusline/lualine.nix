@@ -19,6 +19,11 @@ in {
       description = "Enable icons for lualine";
     };
 
+    lsp-progress = mkOption {
+      type = types.bool;
+      description = "Enable lsp_progress indicator in section c of lualine";
+    };
+
     theme = mkOption {
       type = types.enum (
         [
@@ -155,14 +160,14 @@ in {
   config =
     mkIf cfg.enable
     {
-      #assertions = [
-      #  ({
-      #    assertion = if cfg.icons then (config.vim.visuals.enable && config.vim.visuals.nvimWebDevicons.enable) else true;
-      #    message = "Must enable config.vim.visual.nvimWebDevicons if using config.vim.visuals.lualine.icons";
-      #  })
-      #];
-
-      vim.startPlugins = with pkgs.neovimPlugins; [lualine];
+      vim.startPlugins = with pkgs.neovimPlugins; [
+        lualine
+        (
+          if cfg.lsp-progress
+          then lualine-lsp-progress
+          else null
+        )
+      ];
       vim.luaConfigRC = ''
         require('lualine').setup{
           options = {
@@ -179,7 +184,11 @@ in {
           sections = {
             lualine_a = ${cfg.activeSection.a},
             lualine_b = ${cfg.activeSection.b},
-            lualine_c = ${cfg.activeSection.c},
+            lualine_c = ${
+          if cfg.lsp-progress
+          then "{'filename','lsp_progress'}"
+          else cfg.activeSection.c
+        },
             lualine_x = ${cfg.activeSection.x},
             lualine_y = ${cfg.activeSection.y},
             lualine_z = ${cfg.activeSection.z},
