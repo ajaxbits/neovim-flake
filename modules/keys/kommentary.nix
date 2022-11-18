@@ -16,6 +16,14 @@ in {
     vim.luaConfigRC = ''
       -- Enable kommentary
       require('kommentary.config').use_extended_mappings()
+      require('kommentary.config').configure_language("default", {
+        prefer_single_line_comments = true,
+      })
+      require('kommentary.config').configure_language("nix", {
+        prefer_single_line_comments = true,
+        single_line_comment_string = "#",
+        multi_line_comment_strings = {"/*", "*/"},
+      })
     '';
   };
 }
