@@ -321,16 +321,15 @@
 
       neovimBuilder = lib.neovimBuilder;
 
-
       configBuilder = isMaximal: {
         config = {
-          vim.viAlias = false;
+          vim.viAlias = true;
           vim.vimAlias = true;
           vim.lsp = {
             enable = true;
             formatOnSave = true;
             lightbulb.enable = true;
-            lspsaga.enable = false;
+            lspsaga.enable = true;
             nvimCodeActionMenu.enable = true;
             trouble.enable = true;
             todo-comments.enable = true;
