@@ -216,12 +216,6 @@
       flake = false;
     };
 
-    # Tidal cycles
-    tidalcycles = {
-      url = "github:mitchmindtree/tidalcycles.nix";
-      inputs.vim-tidal-src.url = "github:tidalcycles/vim-tidal";
-    };
-
     # Plenary (required by crates-nvim)
     plenary-nvim = {
       url = "github:nvim-lua/plenary.nvim";
@@ -317,7 +311,6 @@
         config = {allowUnfree = true;};
         overlays = [
           pluginOverlay
-          inputs.tidalcycles.overlays.default
           (final: prev: {
             rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
           })
@@ -328,7 +321,6 @@
 
       neovimBuilder = lib.neovimBuilder;
 
-      tidalConfig = {config = {vim.tidal.enable = true;};};
 
       configBuilder = isMaximal: {
         config = {
@@ -424,20 +416,17 @@
         default = pkgs.mkShell {
           buildInputs = [(neovimBuilder (configBuilder false))];
         };
-        tidal = pkgs.mkShell {buildInputs = [(neovimBuilder tidalConfig)];};
       };
 
       overlays.default = final: prev: {
         inherit neovimBuilder;
         neovimAJ = packages.${system}.neovimAJ;
-        neovimTidal = packages.${system}.neovimTidal;
         neovimPlugins = pkgs.neovimPlugins;
       };
 
       packages = flake-utils.lib.flattenTree rec {
         default = neovimAJ;
         neovimAJ = neovimBuilder (configBuilder true);
-        neovimTidal = neovimBuilder tidalConfig;
       };
     });
 }
