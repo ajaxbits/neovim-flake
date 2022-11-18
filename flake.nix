@@ -329,7 +329,7 @@
             enable = true;
             formatOnSave = true;
             lightbulb.enable = true;
-            lspsaga.enable = true;
+            lspsaga.enable = false;
             nvimCodeActionMenu.enable = true;
             trouble.enable = true;
             todo-comments.enable = true;
