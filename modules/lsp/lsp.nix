@@ -40,6 +40,10 @@ in {
     ts = mkEnableOption "TS language LSP";
     hare = mkEnableOption "Hare plugin (not LSP)";
     hcl = mkEnableOption "HCL plugin (not LSP)";
+    terraform = {
+      enable = mkEnableOption "Terraform Lanuage LSP";
+      lint = mkEnableOption "add linting for Terraform";
+    };
   };
 
   config = mkIf cfg.enable (
@@ -63,11 +67,11 @@ in {
             then sqls-nvim
             else null
           )
-          (
-            if cfg.hcl
-            then vim-hcl
-            else null
-          )
+          # (
+          #   if cfg.hcl || cfg.terraform
+          #   then vim-hcl
+          #   else null
+          # )
         ]
         ++ (
           if cfg.rust.enable
@@ -141,6 +145,10 @@ in {
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
         end
+
+        ${writeIf cfg.terraform.enable ''
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lti', ':!terraform plan<CR>', opts)
+          -- ''}
 
         local null_ls = require("null-ls")
         local null_helpers = require("null-ls.helpers")
@@ -283,6 +291,26 @@ in {
             cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
           }
         ''}
+
+        ${writeIf cfg.terraform.enable ''
+          -- Terraform config
+          lspconfig.terraformls.setup{
+            capabilities = capabilities,
+            on_attach=default_on_attach,
+            cmd = {"${pkgs.terraform-ls}/bin/terraform-ls", "serve"},
+            filetypes = { "terraform", "hcl" },
+          }
+          lspconfig.tflint.setup{
+            capabilities = capabilities;
+            on_attach=default_on_attach;
+            cmd = {"${pkgs.tflint}/bin/tflint", "--langserver"},
+          }
+          vim.api.nvim_create_autocmd({"BufWritePre"}, {
+            pattern = {"*.tf", "*.tfvars", "*.hcl"},
+            callback = vim.lsp.buf.formatting_sync,
+          })
+        ''}
+
 
         ${writeIf cfg.nix ''
           -- Nix config

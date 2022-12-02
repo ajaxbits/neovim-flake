@@ -342,6 +342,8 @@
             nix = true;
             rust.enable = isMaximal;
             python = isMaximal;
+            terraform.enable = isMaximal;
+            terraform.lint = isMaximal;
             clang.enable = isMaximal;
             sql = isMaximal;
             ts = isMaximal;
