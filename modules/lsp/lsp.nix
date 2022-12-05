@@ -146,10 +146,6 @@ in {
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
         end
 
-        ${writeIf cfg.terraform.enable ''
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lti', ':!terraform plan<CR>', opts)
-          -- ''}
-
         local null_ls = require("null-ls")
         local null_helpers = require("null-ls.helpers")
         local null_methods = require("null-ls.methods")
@@ -227,6 +223,10 @@ in {
           format_callback(client, bufnr)
         end
 
+        no_format_on_attach = function(client, bufnr)
+          attach_keymaps(client, bufnr)
+        end
+
         -- Enable null-ls
         require('null-ls').setup({
           diagnostics_format = "[#{m}] #{s} (#{c})",
@@ -296,19 +296,15 @@ in {
           -- Terraform config
           lspconfig.terraformls.setup{
             capabilities = capabilities,
-            on_attach=default_on_attach,
+            on_attach=no_format_on_attach;
             cmd = {"${pkgs.terraform-ls}/bin/terraform-ls", "serve"},
             filetypes = { "terraform", "hcl" },
           }
           lspconfig.tflint.setup{
             capabilities = capabilities;
-            on_attach=default_on_attach;
+            on_attach=no_format_on_attach;
             cmd = {"${pkgs.tflint}/bin/tflint", "--langserver"},
           }
-          vim.api.nvim_create_autocmd({"BufWritePre"}, {
-            pattern = {"*.tf", "*.tfvars", "*.hcl"},
-            callback = vim.lsp.buf.formatting_sync,
-          })
         ''}
 
 
