@@ -72,7 +72,7 @@
     };
 
     # Langauge server (use master instead of nixpkgs)
-    rnix-lsp.url = "github:nix-community/rnix-lsp";
+    nil.url = "github:oxalica/nil";
 
     # Filetrees
     nvim-tree-lua = {
@@ -252,7 +252,7 @@
     flake-utils,
     ...
   } @ inputs: let
-    configuredSystems = with flake-utils.lib.system; [
+    configuredSystems = [
       "x86_64-linux"
       "aarch64-darwin"
     ];
@@ -317,7 +317,7 @@
         overlays = [
           pluginOverlay
           (final: prev: {
-            rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
+            nil = inputs.nil.packages.${system}.default;
           })
         ];
       };
