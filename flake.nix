@@ -330,6 +330,7 @@
         config = {
           vim.viAlias = true;
           vim.vimAlias = true;
+          vim.lineNumberMode = "number";
           vim.lsp = {
             enable = true;
             formatOnSave = true;
@@ -384,6 +385,11 @@
           vim.filetree.nvimTreeLua = {
             enable = true;
             resizeOnFileOpen = true;
+            hideFiles = [
+              "node_modules"
+              ".cache"
+              ".DS_Store"
+            ];
           };
           vim.tabline.nvimBufferline.enable = true;
           vim.treesitter = {
