@@ -57,11 +57,11 @@ Rust analyzer provides builtin formatting with [rustfmt](https://github.com/rust
 
 ### Nix
 
-**LSP Server**: [rnix-lsp](https://github.com/nix-community/rnix-lsp)
+**LSP Server**: [nil](https://github.com/oxalica/nil)
 
 **Formatting**
 
-rnix provides builtin formatting with [nixpkgs-fmt](https://github.com/nix-community/nixpkgs-fmt) but it is disabled and I am instead using null-ls with [alejandra](https://github.com/kamadorueda/alejandra)
+nil provides builtin formatting with [nixpkgs-fmt](https://github.com/nix-community/nixpkgs-fmt) but it is disabled and I am instead using null-ls with [alejandra](https://github.com/kamadorueda/alejandra)
 
 ### SQL
 
