@@ -125,6 +125,14 @@
       url = "github:ray-x/cmp-treesitter";
       flake = false;
     };
+    copilot = {
+      url = "github:zbirenbaum/copilot.lua";
+      flake = false;
+    };
+    copilot-cmp = {
+      url = "github:zbirenbaum/copilot-cmp";
+      flake = false;
+    };
 
     # snippets
     vim-vsnip = {
@@ -285,6 +293,8 @@
         "cmp-vsnip"
         "cmp-path"
         "cmp-treesitter"
+        "copilot"
+        "copilot-cmp"
         "crates-nvim"
         "vim-vsnip"
         "nvim-code-action-menu"
@@ -381,6 +391,7 @@
           vim.autocomplete = {
             enable = true;
             type = "nvim-cmp";
+            copilot.enable = true;
           };
           vim.filetree.nvimTreeLua = {
             enable = true;

@@ -21,8 +21,18 @@ in {
         description = "Set the autocomplete plugin. Options: [nvim-cmp]";
         type = types.enum ["nvim-cmp"];
       };
+
+      copilot = {
+        enable = mkOption {
+          type = types.bool;
+          default = false;
+          description = "enable copilot";
+        };
+      };
     };
   };
+
+  imports = [./copilot.nix];
 
   config = mkIf (cfg.enable) (
     let
@@ -64,6 +74,7 @@ in {
             ${writeIf (config.vim.lsp.enable) "{ name = 'nvim_lsp' },"}
             ${writeIf (config.vim.lsp.rust.enable) "{ name = 'crates' },"}
             { name = 'vsnip' },
+            ${writeIf (config.vim.autocomplete.copilot.enable) "{ name = 'copilot'},"}
             { name = 'treesitter' },
             { name = 'path' },
             { name = 'buffer' },
@@ -78,7 +89,9 @@ in {
               c = cmp.mapping.close(),
             }),
             ['<CR>'] = cmp.mapping.confirm({
-              select = true,
+              behavior = cmp.ConfirmBehavior.Replace,
+              select = false,
+
             }),
             ['<Tab>'] = cmp.mapping(function (fallback)
               if cmp.visible() then
@@ -103,24 +116,11 @@ in {
             completeopt = 'menu,menuone,noinsert',
           },
           formatting = {
-            format = function(entry, vim_item)
-              -- type of kind
-              vim_item.kind = ${
-          writeIf (config.vim.visuals.lspkind.enable)
-          "require('lspkind').presets.default[vim_item.kind] .. ' ' .."
-        } vim_item.kind
-
-              -- name for each source
-              vim_item.menu = ({
-                buffer = "[Buffer]",
-                nvim_lsp = "[LSP]",
-                vsnip = "[VSnip]",
-                crates = "[Crates]",
-                path = "[Path]",
-              })[entry.source.name]
-              return vim_item
-            end,
-          }
+            format = require("lspkind").cmp_format({
+              mode = "symbol",
+              ${writeIf (config.vim.autocomplete.copilot.enable) "symbol_map = { Copilot = '' }"}
+            })
+          },
         })
         ${writeIf (config.vim.autopairs.enable && config.vim.autopairs.type == "nvim-autopairs") ''
           local cmp_autopairs = require('nvim-autopairs.completion.cmp')
