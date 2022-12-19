@@ -19,11 +19,12 @@ in {
 
     vim.nnoremap =
       {
-        "<leader>ff" = "<cmd> Telescope find_files hidden=true<CR>";
+        "<leader>ff" = "<cmd> Telescope find_files<CR>";
         "<leader>fg" = "<cmd> Telescope live_grep<CR>";
         "<leader>fb" = "<cmd> Telescope buffers<CR>";
         "<leader>fh" = "<cmd> Telescope help_tags<CR>";
         "<leader>ft" = "<cmd> Telescope<CR>";
+        "<leader>fo" = "<cmd> Telescope oldfiles<CR>";
 
         "<leader>fvcw" = "<cmd> Telescope git_commits<CR>";
         "<leader>fvcb" = "<cmd> Telescope git_bcommits<CR>";
@@ -63,11 +64,15 @@ in {
             "--with-filename",
             "--line-number",
             "--column",
-            "--smart-case"
+            "--smart-case",
+            "--no-ignore-vcs",
           },
           pickers = {
             find_command = {
               "${pkgs.fd}/bin/fd",
+              "--ignore-case",
+              "--no-ignore-vcs",
+              "--no-ignore-parent",
             },
           },
         }
