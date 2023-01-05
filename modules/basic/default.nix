@@ -24,6 +24,11 @@ in {
       description = "Hide search highlight so it doesn't stay highlighted";
     };
 
+    escNohl = mkOption {
+      type = types.bool;
+      description = "Esc also doubles as nohl to dismiss highlights.";
+    };
+
     scrollOffset = mkOption {
       type = types.int;
       description = "Start scrolling this number of lines from the top or bottom of the page.";
@@ -120,6 +125,7 @@ in {
       vim.colourTerm = mkDefault true;
       vim.disableArrows = false;
       vim.hideSearchHighlight = mkDefault false;
+      vim.escNohl = mkDefault true;
       vim.scrollOffset = mkDefault 8;
       vim.wordWrap = mkDefault true;
       vim.syntaxHighlighting = mkDefault true;
@@ -161,9 +167,18 @@ in {
         else {};
 
       vim.nnoremap =
-        if (cfg.mapLeaderSpace)
-        then {"<space>" = "<nop>";}
-        else {};
+        (
+          if (cfg.mapLeaderSpace)
+          then {"<space>" = "<nop>";}
+          else {}
+        )
+        // (
+          if (cfg.escNohl)
+          then {
+            "<esc>" = ":nohl<CR><esc>";
+          }
+          else {}
+        );
 
       vim.configRC = ''
         " Settings that are set for everything
