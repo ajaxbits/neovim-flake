@@ -38,7 +38,10 @@ in {
         ''
           require("copilot").setup({
             suggestion = {
-              auto_trigger = false;
+              enabled = false;
+            },
+            panel = {
+              enabled = false;
             },
             filetypes = {
               markdown = false;

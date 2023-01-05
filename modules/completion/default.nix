@@ -91,7 +91,6 @@ in {
             ['<CR>'] = cmp.mapping.confirm({
               behavior = cmp.ConfirmBehavior.Replace,
               select = false,
-
             }),
             ['<Tab>'] = cmp.mapping(function (fallback)
               if cmp.visible() then
@@ -114,12 +113,6 @@ in {
           },
           completion = {
             completeopt = 'menu,menuone,noinsert',
-          },
-          formatting = {
-            format = require("lspkind").cmp_format({
-              mode = "symbol",
-              ${writeIf (config.vim.autocomplete.copilot.enable) "symbol_map = { Copilot = '' }"}
-            })
           },
         })
         ${writeIf (config.vim.autopairs.enable && config.vim.autopairs.type == "nvim-autopairs") ''
