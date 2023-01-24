@@ -76,6 +76,11 @@ in {
             then sqls-nvim
             else null
           )
+          (
+            if cfg.java.enable && cfg.java.jdtlsBinPath != ""
+            then nvim-jdtls
+            else null
+          )
         ]
         ++ (
           if cfg.rust.enable
