@@ -280,7 +280,7 @@ in {
           require('rust-tools').setup(rustopts)
         ''}
 
-        ${writeIf cfg.python ''
+        ${writeIf cfg.python.enable ''
           -- Python config
           lspconfig.pyright.setup{
             capabilities = capabilities;
@@ -293,22 +293,22 @@ in {
           }
         ''}
 
-        ${writeIf cfg.java.enable ''
+        ${writeIf cfg.java ''
+          -- Java config
+          lspconfig.java_language_server.setup{
+            capabilities = capabilities,
+            on_attach=default_on_attach,
+            cmd = {"${pkgs.java-language-server}/bin/java-language-server"},
+          }
+        ''}
+
+        ${writeIf cfg.terraform.enable ''
           -- Terraform config
           lspconfig.terraformls.setup{
             capabilities = capabilities,
             on_attach=default_on_attach,
             cmd = {"${pkgs.terraform-ls}/bin/terraform-ls", "serve"},
             filetypes = { "terraform", "hcl" },
-          }
-        ''}
-
-        ${writeIf cfg.terraform.enable ''
-          -- Terraform config
-          lspconfig.java_language_server.setup{
-            capabilities = capabilities,
-            on_attach=default_on_attach,
-            cmd = {"${pkgs.java-language-server}/bin/java-language-server"},
           }
         ''}
 
