@@ -82,11 +82,6 @@ in {
           then [
             crates-nvim
             rust-tools
-            (
-              if cfg.hare
-              then hare-vim
-              else null
-            )
           ]
           else []
         );
