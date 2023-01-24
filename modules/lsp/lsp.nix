@@ -295,7 +295,7 @@ in {
           }
         ''}
 
-        ${writeIf (cfg.java.enable && cfg.java.jdtlsPath) ''
+        ${writeIf (cfg.java.enable && cfg.java.jdtlsBinPath) ''
           -- Java config
           require('jdtls').start_or_attach({
             cmd = {"${cfg.java.jdtlsBinPath}"},
