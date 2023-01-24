@@ -7,15 +7,6 @@
 with lib;
 with builtins; let
   cfg = config.vim.autocomplete;
-
-  ft-includes = [
-    "python"
-    "terraform"
-    "javascript"
-    "rust"
-  ];
-  # TODO: Write a function that does this better
-  ft-excludes = ["markdown"];
 in {
   config = mkIf (cfg.copilot.enable) (
     let
