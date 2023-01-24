@@ -288,7 +288,7 @@ in {
             if cfg.python.format
             then "default_on_attach"
             else "no_format_on_attach"
-          }
+          },
             cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
           }
         ''}
