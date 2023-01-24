@@ -352,7 +352,8 @@
             lspSignature.enable = true;
             nix = true;
             rust.enable = isMaximal;
-            python = isMaximal;
+            python.enable = isMaximal;
+            python.format = false;
             terraform.enable = isMaximal;
             terraform.lint = isMaximal;
             clang.enable = isMaximal;
@@ -360,7 +361,7 @@
             ts = isMaximal;
             go = isMaximal;
             hare = isMaximal;
-            hcl = isMaximal;
+            java = isMaximal;
           };
           vim.visuals = {
             enable = true;

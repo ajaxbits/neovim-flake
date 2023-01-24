@@ -26,7 +26,10 @@ in {
         description = "options to pass to rust analyzer";
       };
     };
-    python = mkEnableOption "Python LSP";
+    python = {
+      enable = mkEnableOption "Python LSP";
+      format = mkEnableOption "Enable Black code formatting.";
+    };
     clang = {
       enable = mkEnableOption "C language LSP";
       c_header = mkEnableOption "C syntax header files";
@@ -39,7 +42,7 @@ in {
     go = mkEnableOption "Go language LSP";
     ts = mkEnableOption "TS language LSP";
     hare = mkEnableOption "Hare plugin (not LSP)";
-    hcl = mkEnableOption "HCL plugin (not LSP)";
+    java = mkEnableOption "Java language LSP";
     terraform = {
       enable = mkEnableOption "Terraform Lanuage LSP";
       lint = mkEnableOption "add linting for Terraform";
@@ -67,11 +70,6 @@ in {
             then sqls-nvim
             else null
           )
-          # (
-          #   if cfg.hcl || cfg.terraform
-          #   then vim-hcl
-          #   else null
-          # )
         ]
         ++ (
           if cfg.rust.enable
@@ -151,16 +149,15 @@ in {
         local null_methods = require("null-ls.methods")
 
         local ls_sources = {
-          ${writeIf cfg.python
+          ${writeIf cfg.python.format
           ''
             null_ls.builtins.formatting.black.with({
               command = "${pkgs.black}/bin/black",
             }),
           ''}
-          -- Commented out for now
-          --${writeIf (config.vim.git.enable && config.vim.git.gitsigns.enable) ''
-          --  null_ls.builtins.code_actions.gitsigns,
-          --''}
+          ${writeIf (config.vim.git.enable && config.vim.git.gitsigns.enable) ''
+          null_ls.builtins.code_actions.gitsigns,
+        ''}
           ${writeIf cfg.sql
           ''
             null_helpers.make_builtin({
@@ -287,26 +284,41 @@ in {
           -- Python config
           lspconfig.pyright.setup{
             capabilities = capabilities;
-            on_attach=default_on_attach;
+            on_attach=${
+            if cfg.python.format
+            then "default_on_attach"
+            else "no_format_on_attach"
+          }
             cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
+          }
+        ''}
+
+        ${writeIf cfg.java.enable ''
+          -- Terraform config
+          lspconfig.terraformls.setup{
+            capabilities = capabilities,
+            on_attach=default_on_attach,
+            cmd = {"${pkgs.terraform-ls}/bin/terraform-ls", "serve"},
+            filetypes = { "terraform", "hcl" },
           }
         ''}
 
         ${writeIf cfg.terraform.enable ''
           -- Terraform config
-          lspconfig.terraformls.setup{
+          lspconfig.java_language_server.setup{
             capabilities = capabilities,
-            on_attach=no_format_on_attach;
-            cmd = {"${pkgs.terraform-ls}/bin/terraform-ls", "serve"},
-            filetypes = { "terraform", "hcl" },
-          }
-          lspconfig.tflint.setup{
-            capabilities = capabilities;
-            on_attach=no_format_on_attach;
-            cmd = {"${pkgs.tflint}/bin/tflint", "--langserver"},
+            on_attach=default_on_attach,
+            cmd = {"${pkgs.java-language-server}/bin/java-language-server"},
           }
         ''}
 
+        ${writeIf cfg.terraform.lint ''
+          lspconfig.tflint.setup{
+            capabilities = capabilities;
+            on_attach=default_on_attach,
+            cmd = {"${pkgs.tflint}/bin/tflint", "--langserver"},
+          }
+        ''}
 
         ${writeIf cfg.nix ''
           -- Nix config
