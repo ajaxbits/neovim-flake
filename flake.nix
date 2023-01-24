@@ -234,18 +234,9 @@
       flake = false;
     };
 
-    hare-vim = {
-      url = "git+https://git.sr.ht/~sircmpwn/hare.vim";
-      flake = false;
-    };
-
-    vim-hcl = {
-      url = "github:jvirtanen/vim-hcl";
-      flake = false;
-    };
-
-    tree-sitter-hare = {
-      url = "git+https://git.sr.ht/~ecmma/tree-sitter-hare";
+    # nvim-jdtls
+    nvim-jdtls = {
+      url = "github:mfussenegger/nvim-jdtls";
       flake = false;
     };
 
@@ -361,7 +352,10 @@
             ts = isMaximal;
             go = isMaximal;
             hare = isMaximal;
-            java = isMaximal;
+            java = {
+              enable = isMaximal;
+              jdtlsBinPath = "/opt/homebrew/bin/jdtls";
+            };
           };
           vim.visuals = {
             enable = true;

@@ -222,22 +222,6 @@
         "type": "github"
       }
     },
-    "hare-vim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1665392760,
-        "narHash": "sha256-E6CJ0C9Oiynx/XVazFyHvypdogMo141fL7Nw1PYJ9Oo=",
-        "ref": "refs/heads/master",
-        "rev": "267fb4dac4e8cd4df1d9b57fa587ce718f5fc256",
-        "revCount": 69,
-        "type": "git",
-        "url": "https://git.sr.ht/~sircmpwn/hare.vim"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.sr.ht/~sircmpwn/hare.vim"
-      }
-    },
     "indent-blankline": {
       "flake": false,
       "locked": {
@@ -579,6 +563,22 @@
         "type": "github"
       }
     },
+    "nvim-jdtls": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674194925,
+        "narHash": "sha256-hvcImtanIpae9JuDVBR6ykr6zHJ4oPirjb05nsbvpsg=",
+        "owner": "mfussenegger",
+        "repo": "nvim-jdtls",
+        "rev": "beb9101fb4a8a4f2655e691980b4c82a27d2e920",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-jdtls",
+        "type": "github"
+      }
+    },
     "nvim-lightbulb": {
       "flake": false,
       "locked": {
@@ -770,7 +770,6 @@
         "gitsigns-nvim": "gitsigns-nvim",
         "glow-nvim": "glow-nvim",
         "gruvbox": "gruvbox",
-        "hare-vim": "hare-vim",
         "indent-blankline": "indent-blankline",
         "kommentary": "kommentary",
         "lazygit": "lazygit",
@@ -791,6 +790,7 @@
         "nvim-code-action-menu": "nvim-code-action-menu",
         "nvim-compe": "nvim-compe",
         "nvim-cursorline": "nvim-cursorline",
+        "nvim-jdtls": "nvim-jdtls",
         "nvim-lightbulb": "nvim-lightbulb",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-neoclip": "nvim-neoclip",
@@ -807,9 +807,7 @@
         "telescope": "telescope",
         "todo-comments": "todo-comments",
         "tokyonight": "tokyonight",
-        "tree-sitter-hare": "tree-sitter-hare",
         "trouble": "trouble",
-        "vim-hcl": "vim-hcl",
         "vim-vsnip": "vim-vsnip",
         "which-key": "which-key"
       }
@@ -919,22 +917,6 @@
         "type": "github"
       }
     },
-    "tree-sitter-hare": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1618403902,
-        "narHash": "sha256-u8mqBVMxbaFQB6uQTcd5Cln6kRAZQ9blqa2TwPvJkUI=",
-        "ref": "refs/heads/master",
-        "rev": "bc26a6a949f2e0d98b7bfc437d459b250900a165",
-        "revCount": 8,
-        "type": "git",
-        "url": "https://git.sr.ht/~ecmma/tree-sitter-hare"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.sr.ht/~ecmma/tree-sitter-hare"
-      }
-    },
     "trouble": {
       "flake": false,
       "locked": {
@@ -948,22 +930,6 @@
       "original": {
         "owner": "folke",
         "repo": "trouble.nvim",
-        "type": "github"
-      }
-    },
-    "vim-hcl": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1645829075,
-        "narHash": "sha256-W/V4s+uxqv2MyVpYxVsTvl8flbSdhQEjE9HJd/vMfB4=",
-        "owner": "jvirtanen",
-        "repo": "vim-hcl",
-        "rev": "1e1116c17a5774851360ea8077f349e36fc733c1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jvirtanen",
-        "repo": "vim-hcl",
         "type": "github"
       }
     },

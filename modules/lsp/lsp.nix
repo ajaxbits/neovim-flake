@@ -42,7 +42,13 @@ in {
     go = mkEnableOption "Go language LSP";
     ts = mkEnableOption "TS language LSP";
     hare = mkEnableOption "Hare plugin (not LSP)";
-    java = mkEnableOption "Java language LSP";
+    java = {
+      enable = mkEnableOption "Java language LSP";
+      jdtlsBinPath = mkOption {
+        type = types.str;
+        default = "";
+      };
+    };
     terraform = {
       enable = mkEnableOption "Terraform Lanuage LSP";
       lint = mkEnableOption "add linting for Terraform";
@@ -294,13 +300,12 @@ in {
           }
         ''}
 
-        ${writeIf cfg.java ''
+        ${writeIf (cfg.java.enable && cfg.java.jdtlsPath) ''
           -- Java config
-          lspconfig.java_language_server.setup{
-            capabilities = capabilities,
-            on_attach=default_on_attach,
-            cmd = {"${pkgs.java-language-server}/bin/java-language-server"},
-          }
+          require('jdtls').start_or_attach({
+            cmd = {"${cfg.java.jdtlsBinPath}"},
+            -- root_dir = require('jdtls.setup').find_root({'gradle.build', 'pom.xml'})
+          })
         ''}
 
         ${writeIf cfg.terraform.enable ''
