@@ -234,12 +234,6 @@
       flake = false;
     };
 
-    # nvim-jdtls
-    nvim-jdtls = {
-      url = "github:mfussenegger/nvim-jdtls";
-      flake = false;
-    };
-
     lazygit = {
       url = "github:kdheepak/lazygit.nvim";
       flake = false;
@@ -303,7 +297,6 @@
         "rust-tools"
         "onedark"
         "gruvbox"
-        "nvim-jdtls"
         "kommentary"
         "todo-comments"
         "lazygit"

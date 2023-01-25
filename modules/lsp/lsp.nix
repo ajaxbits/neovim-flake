@@ -42,13 +42,6 @@ in {
     go = mkEnableOption "Go language LSP";
     ts = mkEnableOption "TS language LSP";
     hare = mkEnableOption "Hare plugin (not LSP)";
-    java = {
-      enable = mkEnableOption "Java language LSP";
-      jdtlsBinPath = mkOption {
-        type = types.str;
-        default = "";
-      };
-    };
     terraform = {
       enable = mkEnableOption "Terraform Lanuage LSP";
       lint = mkEnableOption "add linting for Terraform";
@@ -74,11 +67,6 @@ in {
           (
             if cfg.sql
             then sqls-nvim
-            else null
-          )
-          (
-            if cfg.java.enable && cfg.java.jdtlsBinPath != ""
-            then nvim-jdtls
             else null
           )
         ]
@@ -298,14 +286,6 @@ in {
           },
             cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
           }
-        ''}
-
-        ${writeIf (cfg.java.enable && cfg.java.jdtlsBinPath != "") ''
-          -- Java config
-          require('jdtls').start_or_attach({
-            cmd = {"${cfg.java.jdtlsBinPath}"},
-            -- root_dir = require('jdtls.setup').find_root({'gradle.build', 'pom.xml'})
-          })
         ''}
 
         ${writeIf cfg.terraform.enable ''
