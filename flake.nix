@@ -344,10 +344,6 @@
             ts = isMaximal;
             go = isMaximal;
             hare = isMaximal;
-            java = {
-              enable = isMaximal;
-              jdtlsBinPath = "/opt/homebrew/bin/jdtls";
-            };
           };
           vim.visuals = {
             enable = true;
