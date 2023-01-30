@@ -336,7 +336,7 @@
             nix = true;
             rust.enable = isMaximal;
             python.enable = isMaximal;
-            python.format = false;
+            python.format = true;
             terraform.enable = isMaximal;
             terraform.lint = isMaximal;
             clang.enable = isMaximal;
