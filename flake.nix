@@ -403,7 +403,8 @@
           vim.telescope = {enable = true;};
           vim.markdown = {
             enable = true;
-            glow.enable = true;
+            glow.enable = false;
+            markdown-preview.enable = true;
           };
           vim.git = {
             enable = true;

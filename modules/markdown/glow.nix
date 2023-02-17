@@ -16,6 +16,12 @@ in {
       default = true;
       description = "Enable markdown preview in neovim with glow";
     };
+
+    markdown-preview.enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable markdown preview in neovim with glow";
+    };
   };
 
   config = mkIf (cfg.enable) {
@@ -23,6 +29,11 @@ in {
       (
         if cfg.glow.enable
         then glow-nvim
+        else null
+      )
+      (
+        if cfg.markdown-preview.enable
+        then pkgs.vimPlugins.markdown-preview-nvim
         else null
       )
     ];
