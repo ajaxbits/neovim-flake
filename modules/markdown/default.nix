@@ -6,6 +6,6 @@
 }: {
   imports = [
     ./config.nix
-    ./glow.nix
+    ./preview.nix
   ];
 }
