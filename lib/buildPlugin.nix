@@ -23,6 +23,8 @@
     p.tree-sitter-graphql
     p.tree-sitter-json
     p.tree-sitter-hcl
+    p.tree-sitter-yaml
+    p.tree-sitter-java
   ]);
 
   buildPlug = name:
