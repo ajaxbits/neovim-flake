@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "chatgpt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678801636,
+        "narHash": "sha256-wvO4lNMb+1AxyzwQ7InfG3QeRcoz4Mhc7JYpdWU38+s=",
+        "owner": "jackMort",
+        "repo": "ChatGPT.nvim",
+        "rev": "3008b38171b3137448fe33c5edc1bba2641bfcad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jackMort",
+        "repo": "ChatGPT.nvim",
+        "type": "github"
+      }
+    },
     "cmp-buffer": {
       "flake": false,
       "locked": {
@@ -450,6 +466,22 @@
         "type": "github"
       }
     },
+    "nui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677566469,
+        "narHash": "sha256-xHpNGJ8ikTMiWHAtqaZg5IVKSngH/k0LN7WaOHl2iz8=",
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
+        "rev": "0dc148c6ec06577fcf06cbab3b7dac96d48ba6be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
+        "type": "github"
+      }
+    },
     "null-ls": {
       "flake": false,
       "locked": {
@@ -742,6 +774,7 @@
     "root": {
       "inputs": {
         "bufdelete-nvim": "bufdelete-nvim",
+        "chatgpt": "chatgpt",
         "cmp-buffer": "cmp-buffer",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
@@ -767,6 +800,7 @@
         "lualine-lsp-progress": "lualine-lsp-progress",
         "nil": "nil",
         "nixpkgs": "nixpkgs_2",
+        "nui": "nui",
         "null-ls": "null-ls",
         "nvim-autopairs": "nvim-autopairs",
         "nvim-bufferline-lua": "nvim-bufferline-lua",

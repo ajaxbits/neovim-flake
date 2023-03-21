@@ -125,12 +125,22 @@
       url = "github:ray-x/cmp-treesitter";
       flake = false;
     };
+
+    # ML
     copilot = {
       url = "github:zbirenbaum/copilot.lua";
       flake = false;
     };
     copilot-cmp = {
       url = "github:zbirenbaum/copilot-cmp";
+      flake = false;
+    };
+    chatgpt = {
+      url = "github:jackMort/ChatGPT.nvim";
+      flake = false;
+    };
+    nui = {
+      url = "github:MunifTanjim/nui.nvim";
       flake = false;
     };
 
@@ -253,53 +263,55 @@
     flake-utils.lib.eachSystem configuredSystems (system: let
       # Plugin must be same as input name
       plugins = [
-        "nvim-treesitter-context"
-        "gitsigns-nvim"
-        "plenary-nvim"
-        "nvim-lspconfig"
-        "nvim-treesitter"
-        "lspsaga"
-        "lspkind"
-        "nvim-lightbulb"
-        "lsp-signature"
-        "nvim-tree-lua"
-        "nvim-bufferline-lua"
-        "lualine"
-        "lualine-lsp-progress"
-        "nvim-compe"
-        "nvim-autopairs"
-        "nvim-ts-autotag"
-        "nvim-web-devicons"
-        "tokyonight"
         "bufdelete-nvim"
-        "nvim-cmp"
-        "cmp-nvim-lsp"
+        "chatgpt"
         "cmp-buffer"
-        "cmp-vsnip"
+        "cmp-nvim-lsp"
         "cmp-path"
         "cmp-treesitter"
+        "cmp-vsnip"
         "copilot"
         "copilot-cmp"
         "crates-nvim"
-        "vim-vsnip"
-        "nvim-code-action-menu"
-        "trouble"
-        "null-ls"
-        "which-key"
+        "gitsigns-nvim"
+        "glow-nvim"
+        "gruvbox"
+        "indent-blankline"
+        "kommentary"
+        "lazygit"
         "leap"
         "leap-ast"
         "leap-spooky"
-        "indent-blankline"
+        "lsp-signature"
+        "lspkind"
+        "lspsaga"
+        "lualine"
+        "lualine-lsp-progress"
+        "nui"
+        "null-ls"
+        "nvim-autopairs"
+        "nvim-bufferline-lua"
+        "nvim-cmp"
+        "nvim-code-action-menu"
+        "nvim-compe"
         "nvim-cursorline"
-        "sqls-nvim"
-        "glow-nvim"
-        "telescope"
-        "rust-tools"
+        "nvim-lightbulb"
+        "nvim-lspconfig"
+        "nvim-tree-lua"
+        "nvim-treesitter"
+        "nvim-treesitter-context"
+        "nvim-ts-autotag"
+        "nvim-web-devicons"
         "onedark"
-        "gruvbox"
-        "kommentary"
+        "plenary-nvim"
+        "rust-tools"
+        "sqls-nvim"
+        "telescope"
         "todo-comments"
-        "lazygit"
+        "tokyonight"
+        "trouble"
+        "vim-vsnip"
+        "which-key"
       ];
 
       pluginOverlay = lib.buildPluginOverlay;
@@ -399,6 +411,10 @@
               spooky = true;
             };
             kommentary.enable = true;
+          };
+          vim.snippets = {
+            vsnip.enable = true;
+            chatgpt.enable = true;
           };
           vim.telescope = {enable = true;};
           vim.markdown = {
