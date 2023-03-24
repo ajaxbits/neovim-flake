@@ -36,6 +36,7 @@ in {
             },
             filetypes = {
               markdown = false;
+              yaml = true;
             },
             copilot_node_command = "${pkgs.nodejs}/bin/node",
           })
