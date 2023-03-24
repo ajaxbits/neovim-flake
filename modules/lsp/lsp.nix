@@ -294,7 +294,7 @@ in {
             capabilities = capabilities,
             on_attach=default_on_attach,
             cmd = {"${pkgs.terraform-ls}/bin/terraform-ls", "serve"},
-            filetypes = { "terraform", "hcl", "tfvars" },
+            filetypes = { "terraform", "hcl", "terraform-vars" },
           }
         ''}
 
