@@ -160,6 +160,22 @@
         "type": "github"
       }
     },
+    "devcontainer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658407246,
+        "narHash": "sha256-nBz627vWdXZMhFvkIxmncqYFsQbrFTROO4P4JMRPpQU=",
+        "owner": "esensar",
+        "repo": "nvim-dev-container",
+        "rev": "4d01b653069ae00dcb8161b86ef337eca02b0bae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "esensar",
+        "repo": "nvim-dev-container",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1667395993,
@@ -783,6 +799,7 @@
         "copilot": "copilot",
         "copilot-cmp": "copilot-cmp",
         "crates-nvim": "crates-nvim",
+        "devcontainer": "devcontainer",
         "flake-utils": "flake-utils",
         "gitsigns-nvim": "gitsigns-nvim",
         "glow-nvim": "glow-nvim",
