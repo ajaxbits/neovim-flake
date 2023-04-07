@@ -248,10 +248,6 @@
       url = "github:kdheepak/lazygit.nvim";
       flake = false;
     };
-    devcontainer = {
-      url = "github:esensar/nvim-dev-container";
-      flake = false;
-    };
   };
 
   outputs = {
@@ -277,7 +273,6 @@
         "copilot"
         "copilot-cmp"
         "crates-nvim"
-        "devcontainer"
         "gitsigns-nvim"
         "glow-nvim"
         "gruvbox"
@@ -431,9 +426,6 @@
             enable = true;
             gitsigns.enable = true;
             lazygit.enable = true;
-          };
-          vim.devcontainer = {
-            enable = true;
           };
         };
       };

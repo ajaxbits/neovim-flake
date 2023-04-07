@@ -22,6 +22,5 @@
     ./markdown
     ./telescope
     ./git
-    ./devcontainer
   ];
 }
