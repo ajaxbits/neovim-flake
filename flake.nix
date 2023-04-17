@@ -349,6 +349,7 @@
             rust.enable = isMaximal;
             python.enable = isMaximal;
             python.format = true;
+            bash.enable = isMaximal;
             terraform.enable = isMaximal;
             terraform.lint = isMaximal;
             clang.enable = isMaximal;

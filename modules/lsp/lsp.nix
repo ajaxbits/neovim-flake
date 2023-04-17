@@ -30,6 +30,9 @@ in {
       enable = mkEnableOption "Python LSP";
       format = mkEnableOption "Enable Black code formatting.";
     };
+    bash = {
+      enable = mkEnableOption "Bash LSP";
+    };
     clang = {
       enable = mkEnableOption "C language LSP";
       c_header = mkEnableOption "C syntax header files";
@@ -303,6 +306,15 @@ in {
             capabilities = capabilities;
             on_attach=default_on_attach,
             cmd = {"${pkgs.tflint}/bin/tflint", "--langserver"},
+          }
+        ''}
+
+        ${writeIf cfg.bash.enable ''
+          -- Bash config
+          lspconfig.bashls.setup{
+            capabilities = capabilities;
+            on_attach=no_format_on_attach,
+            cmd = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"},
           }
         ''}
 
