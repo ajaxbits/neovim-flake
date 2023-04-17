@@ -414,7 +414,7 @@
           };
           vim.snippets = {
             vsnip.enable = true;
-            chatgpt.enable = true;
+            chatgpt.enable = false;
           };
           vim.telescope = {enable = true;};
           vim.markdown = {
