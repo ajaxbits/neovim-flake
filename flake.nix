@@ -135,14 +135,6 @@
       url = "github:zbirenbaum/copilot-cmp";
       flake = false;
     };
-    chatgpt = {
-      url = "github:jackMort/ChatGPT.nvim";
-      flake = false;
-    };
-    nui = {
-      url = "github:MunifTanjim/nui.nvim";
-      flake = false;
-    };
 
     # snippets
     vim-vsnip = {
@@ -244,8 +236,13 @@
       flake = false;
     };
 
+    # Git
     lazygit = {
       url = "github:kdheepak/lazygit.nvim";
+      flake = false;
+    };
+    gitlinker-nvim = {
+      url = "github:ruifm/gitlinker.nvim";
       flake = false;
     };
   };
@@ -273,6 +270,7 @@
         "copilot"
         "copilot-cmp"
         "crates-nvim"
+        "gitlinker-nvim"
         "gitsigns-nvim"
         "glow-nvim"
         "gruvbox"
@@ -427,6 +425,7 @@
             enable = true;
             gitsigns.enable = true;
             lazygit.enable = true;
+            gitlinker.enable = true;
           };
         };
       };

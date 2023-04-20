@@ -16,22 +16,6 @@
         "type": "github"
       }
     },
-    "chatgpt": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1678801636,
-        "narHash": "sha256-wvO4lNMb+1AxyzwQ7InfG3QeRcoz4Mhc7JYpdWU38+s=",
-        "owner": "jackMort",
-        "repo": "ChatGPT.nvim",
-        "rev": "3008b38171b3137448fe33c5edc1bba2641bfcad",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jackMort",
-        "repo": "ChatGPT.nvim",
-        "type": "github"
-      }
-    },
     "cmp-buffer": {
       "flake": false,
       "locked": {
@@ -187,6 +171,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "gitlinker-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675414954,
+        "narHash": "sha256-zrHvJSROjrDC5XtepOwuDrzrJG2jpnF5NJ05Iwd6DwA=",
+        "owner": "ruifm",
+        "repo": "gitlinker.nvim",
+        "rev": "cc59f732f3d043b626c8702cb725c82e54d35c25",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ruifm",
+        "repo": "gitlinker.nvim",
         "type": "github"
       }
     },
@@ -463,22 +463,6 @@
         "owner": "nixos",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nui": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1677566469,
-        "narHash": "sha256-xHpNGJ8ikTMiWHAtqaZg5IVKSngH/k0LN7WaOHl2iz8=",
-        "owner": "MunifTanjim",
-        "repo": "nui.nvim",
-        "rev": "0dc148c6ec06577fcf06cbab3b7dac96d48ba6be",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MunifTanjim",
-        "repo": "nui.nvim",
         "type": "github"
       }
     },
@@ -774,7 +758,6 @@
     "root": {
       "inputs": {
         "bufdelete-nvim": "bufdelete-nvim",
-        "chatgpt": "chatgpt",
         "cmp-buffer": "cmp-buffer",
         "cmp-nvim-lsp": "cmp-nvim-lsp",
         "cmp-path": "cmp-path",
@@ -784,6 +767,7 @@
         "copilot-cmp": "copilot-cmp",
         "crates-nvim": "crates-nvim",
         "flake-utils": "flake-utils",
+        "gitlinker-nvim": "gitlinker-nvim",
         "gitsigns-nvim": "gitsigns-nvim",
         "glow-nvim": "glow-nvim",
         "gruvbox": "gruvbox",
@@ -800,7 +784,6 @@
         "lualine-lsp-progress": "lualine-lsp-progress",
         "nil": "nil",
         "nixpkgs": "nixpkgs_2",
-        "nui": "nui",
         "null-ls": "null-ls",
         "nvim-autopairs": "nvim-autopairs",
         "nvim-bufferline-lua": "nvim-bufferline-lua",

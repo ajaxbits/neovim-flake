@@ -8,5 +8,6 @@
     ./config.nix
     ./git.nix
     ./lazygit.nix
+    ./gitlinker.nix
   ];
 }
