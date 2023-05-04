@@ -175,7 +175,7 @@ in {
 
             null_ls.builtins.diagnostics.sqlfluff.with({
               command = "${pkgs.sqlfluff}/bin/sqlfluff",
-              extra_args = {"--dialect", "postgres"}
+              extra_args = {"--dialect", "snowflake"}
             }),
           ''}
           ${writeIf cfg.nix
