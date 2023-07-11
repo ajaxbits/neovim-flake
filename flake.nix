@@ -431,6 +431,8 @@
       };
       vsCodeConfig = {
         config = {
+          vim.viAlias = false;
+          vim.vimAlias = false;
           vim.lineNumberMode = "number";
           vim.lsp.enable = false;
           vim.visuals.enable = false;
@@ -477,7 +479,15 @@
       packages = flake-utils.lib.flattenTree rec {
         default = neovimAJ;
         neovimAJ = neovimBuilder (configBuilder true);
-        neovimVSCode = neovimBuilder vsCodeConfig;
+        neovimVSCode = let
+          origPackage = neovimBuilder vsCodeConfig;
+          newBinName = "nvim-vscode";
+        in
+          origPackage.overrideAttrs (oldAttrs: {
+            postInstall = ''
+              mv $out/bin/nvim $out/bin/${newBinName}
+            '';
+          });
       };
     });
 }
