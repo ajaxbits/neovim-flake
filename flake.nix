@@ -483,11 +483,14 @@
           origPackage = neovimBuilder vsCodeConfig;
           newBinName = "nvim-vscode";
         in
-          origPackage.overrideAttrs (oldAttrs: {
-            postInstall = ''
-              mv $out/bin/nvim $out/bin/${newBinName}
+          pkgs.stdenv.mkDerivation {
+            name = newBinName;
+            buildInputs = [origPackage];
+            buildCommand = ''
+              mkdir -p $out/bin
+              ln -s ${origPackage}/bin/nvim $out/bin/${newBinName}
             '';
-          });
+          };
       };
     });
 }
