@@ -429,6 +429,31 @@
           };
         };
       };
+      vsCodeConfig = {
+        config = {
+          vim.lineNumberMode = "number";
+          vim.lsp.enable = false;
+          vim.visuals.enable = false;
+          vim.statusline.lualine.enable = false;
+          vim.theme.enable = false;
+          vim.autopairs.enable = false;
+          vim.autocomplete.enable = false;
+          vim.filetree.nvimTreeLua.enable = false;
+          vim.tabline.nvimBufferline.enable = false;
+          vim.treesitter.enable = false;
+          vim.keys = {
+            enable = true;
+            leap = {
+              enable = true;
+              ast = true;
+              spooky = true;
+            };
+            kommentary.enable = true;
+          };
+          vim.markdown.enable = false;
+          vim.git.enable = false;
+        };
+      };
     in rec {
       apps = rec {
         nvim = flake-utils.lib.mkApp {
@@ -452,6 +477,7 @@
       packages = flake-utils.lib.flattenTree rec {
         default = neovimAJ;
         neovimAJ = neovimBuilder (configBuilder true);
+        neovimVSCode = neovimBuilder vsCodeConfig;
       };
     });
 }
