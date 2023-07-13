@@ -240,6 +240,9 @@ in {
         ${writeIf cfg.syntaxHighlighting ''
           syntax on
         ''}
+        ${writeIf (cfg.syntaxHighlighting == false) ''
+          syntax off
+        ''}
         ${writeIf (cfg.wordWrap == false) ''
           set nowrap
         ''}
