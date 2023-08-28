@@ -1,8 +1,8 @@
 {
   description = "Alex's Neovim Configuration";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+    flake-utils.url = "https://flakehub.com/f/numtide/flake-utils/*.tar.gz";
 
     # LSP plugins
     nvim-lspconfig = {
