@@ -23,5 +23,6 @@
     ./markdown
     ./telescope
     ./git
+    ./surround
   ];
 }
