@@ -5,22 +5,23 @@
   ...
 }: {
   imports = [
-    ./completion
-    ./theme
-    ./core
-    ./basic
-    ./statusline
-    ./tabline
-    ./filetree
-    ./visuals
-    ./lsp
-    ./treesitter
-    ./tidal
     ./autopairs
-    ./snippets
-    ./keys
-    ./markdown
-    ./telescope
+    ./basic
+    ./completion
+    ./core
+    ./filetree
     ./git
+    ./keys
+    ./lsp
+    ./markdown
+    ./snippets
+    ./statusline
+    ./surround
+    ./tabline
+    ./telescope
+    ./theme
+    ./tidal
+    ./treesitter
+    ./visuals
   ];
 }

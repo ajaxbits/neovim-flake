@@ -151,6 +151,10 @@
       url = "github:windwp/nvim-ts-autotag";
       flake = false;
     };
+    nvim-surround = {
+      url = "github:kylechui/nvim-surround";
+      flake = false;
+    };
 
     # Commenting
     kommentary = {
@@ -295,6 +299,7 @@
         "nvim-cursorline"
         "nvim-lightbulb"
         "nvim-lspconfig"
+        "nvim-surround"
         "nvim-tree-lua"
         "nvim-treesitter"
         "nvim-treesitter-context"
@@ -382,6 +387,7 @@
             name = "gruvbox";
           };
           vim.autopairs.enable = true;
+          vim.surround.enable = true;
           vim.autocomplete = {
             enable = true;
             type = "nvim-cmp";
