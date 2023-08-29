@@ -56,7 +56,12 @@ in {
               undercurl = true,
               underline = true,
               bold = true,
-              italic = true,
+              italic = {
+                  strings = false,
+                  comments = true,
+                  operators = true,
+                  folds = true,
+                },
               strikethrough = true,
               invert_selection = false,
               invert_signs = false,
