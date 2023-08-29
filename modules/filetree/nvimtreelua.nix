@@ -147,8 +147,8 @@ in {
         disable_netrw = ${boolToString cfg.disableNetRW},
         hijack_netrw = ${boolToString cfg.hijackNetRW},
         open_on_tab = ${boolToString cfg.openTreeOnNewTab},
-        open_on_setup = ${boolToString cfg.openOnSetup},
-        open_on_setup_file = ${boolToString cfg.openOnSetup},
+        sync_root_with_cwd = true,
+        hijack_unnamed_buffer_when_opening = true,
         system_open = {
           cmd = ${"'" + cfg.systemOpenCmd + "'"},
         },
