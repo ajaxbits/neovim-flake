@@ -19,7 +19,7 @@ in {
 
     vim.nnoremap =
       {
-        "<leader>ff" = "<cmd> Telescope find_files<CR>";
+        "<leader>ff" = "<cmd> Telescope find_files hidden=true<CR>";
         "<leader>fg" = "<cmd> Telescope live_grep<CR>";
         "<leader>fb" = "<cmd> Telescope buffers<CR>";
         "<leader>fh" = "<cmd> Telescope help_tags<CR>";
@@ -60,19 +60,32 @@ in {
           vimgrep_arguments = {
             "${pkgs.ripgrep}/bin/rg",
             "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--no-ignore-vcs",
+            "--follow",        -- Follow symbolic links
+            "--hidden",        -- Search for hidden files
+            "--no-heading",    -- Don't group matches by each file
+            "--with-filename", -- Print the file path with the matched lines
+            "--line-number",   -- Show line numbers
+            "--column",        -- Show column numbers
+            "--smart-case",    -- Smart case search
+
+            -- Exclude some patterns from search
+            "--glob=!**/.git/*",
+            "--glob=!**/.idea/*",
+            "--glob=!**/.vscode/*",
+            "--glob=!**/build/*",
+            "--glob=!**/dist/*",
+            "--glob=!**/yarn.lock",
+            "--glob=!**/package-lock.json",
           },
           pickers = {
             find_command = {
               "${pkgs.fd}/bin/fd",
               "--ignore-case",
-              "--no-ignore-vcs",
-              "--no-ignore-parent",
+              "--type file",
+              "--unrestricted",
+              "--exclude node_modules",
+              "--exclude .git",
+              "--exclude result",
             },
           },
         }
