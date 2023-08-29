@@ -387,7 +387,7 @@
             name = "gruvbox";
           };
           vim.autopairs.enable = true;
-          vim.surround.enable = true;
+          vim.surround.enable = false;
           vim.autocomplete = {
             enable = true;
             type = "nvim-cmp";

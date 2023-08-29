@@ -5,23 +5,23 @@
   ...
 }: {
   imports = [
-    ./autopairs
-    ./basic
+    # WARN: Order matters here, if you can believe it...
     ./completion
-    ./core
-    ./filetree
-    ./git
-    ./keys
-    ./lsp
-    ./markdown
-    ./snippets
-    ./statusline
-    ./surround
-    ./tabline
-    ./telescope
     ./theme
-    ./tidal
-    ./treesitter
+    ./core
+    ./basic
+    ./statusline
+    ./tabline
+    ./filetree
     ./visuals
+    ./lsp
+    ./treesitter
+    ./tidal
+    ./autopairs
+    ./snippets
+    ./keys
+    ./markdown
+    ./telescope
+    ./git
   ];
 }
