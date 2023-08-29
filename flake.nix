@@ -480,10 +480,18 @@
       packages = flake-utils.lib.flattenTree rec {
         default = neovimAJ;
         neovimAJ = neovimBuilder (configBuilder true);
-        neovimVSCode = import ./rename-package.nix {
+        neovimVSCode = let
           origPackage = neovimBuilder vsCodeConfig;
           newBinName = "nvim-vscode";
-        };
+        in
+          pkgs.stdenv.mkDerivation {
+            name = newBinName;
+            buildInputs = [origPackage];
+            buildCommand = ''
+              mkdir -p $out/bin
+              ln -s ${origPackage}/bin/nvim $out/bin/${newBinName}
+            '';
+          };
       };
     });
 
