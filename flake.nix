@@ -351,7 +351,7 @@
             terraform.enable = isMaximal;
             terraform.lint = isMaximal;
             clang.enable = isMaximal;
-            sql = true;
+            sql = false;
             ts = isMaximal;
             go = isMaximal;
             hare = isMaximal;
@@ -399,7 +399,7 @@
           vim.tabline.nvimBufferline.enable = true;
           vim.treesitter = {
             enable = true;
-            context.enable = true;
+            context.enable = false;
           };
           vim.keys = {
             enable = true;
