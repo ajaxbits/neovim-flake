@@ -83,9 +83,7 @@ in {
               "--ignore-case",
               "--type file",
               "--unrestricted",
-              "--exclude node_modules",
-              "--exclude .git",
-              "--exclude result",
+              "--exclude=.git",
             },
           },
         }
