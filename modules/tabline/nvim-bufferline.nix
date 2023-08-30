@@ -52,13 +52,18 @@ in {
         require("bufferline").setup{
            options = {
               numbers = "both",
-              close_command = ${mouse.close},
+              close_command = "bdelete! %d",
               right_mouse_command = ${mouse.right},
+              hover = {
+                enabled = true,
+                delay = 200,
+                reveal = {'close'},
+              },
               indicator = {
                 indicator_icon = '▎',
                 style = 'icon',
               },
-              buffer_close_icon = '',
+              buffer_close_icon = '✕',
               modified_icon = '●',
               close_icon = '',
               left_trunc_marker = '',
