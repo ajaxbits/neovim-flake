@@ -357,6 +357,7 @@
             terraform.lint = isMaximal;
             clang.enable = isMaximal;
             sql = false;
+            yaml = true;
             ts = isMaximal;
             go = isMaximal;
             hare = isMaximal;

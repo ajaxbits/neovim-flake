@@ -42,6 +42,7 @@ in {
       };
     };
     sql = mkEnableOption "SQL Language LSP";
+    yaml = mkEnableOption "Yaml Language LSP (with github actions support)";
     go = mkEnableOption "Go language LSP";
     ts = mkEnableOption "TS language LSP";
     hare = mkEnableOption "Hare plugin (not LSP)";
@@ -340,6 +341,22 @@ in {
             then ""
             else "init_options = ${cfg.clang.cclsOpts}"
           }
+          }
+        ''}
+
+        ${writeIf cfg.yaml ''
+          -- YAMLLS config
+          lspconfig.yamlls.setup {
+            capabilities = capabilities;
+            on_attach = default_on_attach;
+            cmd = {"${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server", "--stdio"},
+            settings = {
+              yaml = {
+                schemas = {
+                  ["https://json.schemastore.org/github-workflow.json"] = "/.github/**/*",
+                },
+              },
+            },
           }
         ''}
 
