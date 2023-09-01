@@ -10,7 +10,7 @@
       flake = false;
     };
     nvim-treesitter = {
-      url = "github:nvim-treesitter/nvim-treesitter?ref=v0.9.0";
+      url = "github:nvim-treesitter/nvim-treesitter";
       flake = false;
     };
     lspsaga = {
