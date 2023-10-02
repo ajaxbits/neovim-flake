@@ -450,6 +450,7 @@
           vim.filetree.nvimTreeLua.enable = false;
           vim.tabline.nvimBufferline.enable = false;
           vim.treesitter.enable = false;
+          vim.surround.enable = true;
           vim.syntaxHighlighting = false;
           vim.keys = {
             enable = true;
