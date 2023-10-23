@@ -99,28 +99,18 @@ in {
         ${
           if cfg.indentBlankline.enable
           then ''
-            -- highlight error: https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
-            vim.wo.colorcolumn = "99999"
             vim.opt.list = true
-
-
             ${
               if cfg.indentBlankline.eolChar == ""
               then ""
               else ''vim.opt.listchars:append({ eol = "${cfg.indentBlankline.eolChar}" })''
             }
-
             ${
               if cfg.indentBlankline.fillChar == ""
               then ""
               else ''vim.opt.listchars:append({ space = "${cfg.indentBlankline.fillChar}"})''
             }
-
-            require("indent_blankline").setup {
-              char = "${cfg.indentBlankline.listChar}",
-              show_current_context = ${boolToString cfg.indentBlankline.showCurrContext},
-              show_end_of_line = true,
-            }
+            require("ibl").setup()
           ''
           else ""
         }
