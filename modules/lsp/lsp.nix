@@ -294,6 +294,12 @@ in {
 
         ${writeIf cfg.terraform.enable ''
           -- Terraform config
+          vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
+          vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
+          vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
+          vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=hcl]])
+          vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+
           lspconfig.terraformls.setup{
             capabilities = capabilities,
             on_attach=default_on_attach,
