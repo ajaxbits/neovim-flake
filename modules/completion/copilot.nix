@@ -8,7 +8,7 @@ with lib;
 with builtins; let
   cfg = config.vim.autocomplete;
 in {
-  config = mkIf (cfg.copilot.enable) (
+  config = mkIf cfg.copilot.enable (
     let
       writeIf = cond: msg:
         if cond

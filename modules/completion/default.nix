@@ -34,7 +34,7 @@ in {
 
   imports = [./copilot.nix];
 
-  config = mkIf (cfg.enable) (
+  config = mkIf cfg.enable (
     let
       writeIf = cond: msg:
         if cond
@@ -71,10 +71,10 @@ in {
             end,
           },
           sources = {
-            ${writeIf (config.vim.lsp.enable) "{ name = 'nvim_lsp' },"}
-            ${writeIf (config.vim.lsp.rust.enable) "{ name = 'crates' },"}
+            ${writeIf config.vim.lsp.enable "{ name = 'nvim_lsp' },"}
+            ${writeIf config.vim.lsp.rust.enable "{ name = 'crates' },"}
             { name = 'vsnip' },
-            ${writeIf (config.vim.autocomplete.copilot.enable) "{ name = 'copilot'},"}
+            ${writeIf config.vim.autocomplete.copilot.enable "{ name = 'copilot'},"}
             { name = 'treesitter' },
             { name = 'path' },
             { name = 'buffer' },

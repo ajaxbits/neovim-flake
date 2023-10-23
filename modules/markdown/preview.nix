@@ -24,7 +24,7 @@ in {
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     vim.startPlugins = with pkgs.neovimPlugins; [
       (
         if cfg.glow.enable
@@ -38,7 +38,7 @@ in {
       )
     ];
 
-    vim.globals = mkIf (cfg.glow.enable) {
+    vim.globals = mkIf cfg.glow.enable {
       "glow_binary_path" = "${pkgs.glow}/bin";
     };
 

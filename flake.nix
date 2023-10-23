@@ -332,7 +332,7 @@
 
       lib = import ./lib {inherit pkgs inputs plugins;};
 
-      neovimBuilder = lib.neovimBuilder;
+      inherit (lib) neovimBuilder;
 
       configBuilder = isMaximal: {
         config = {
@@ -481,8 +481,8 @@
 
       overlays.default = final: prev: {
         inherit neovimBuilder;
-        neovimAJ = packages.${system}.neovimAJ;
-        neovimPlugins = pkgs.neovimPlugins;
+        inherit (packages.${system}) neovimAJ;
+        inherit (pkgs) neovimPlugins;
       };
 
       packages = flake-utils.lib.flattenTree rec {

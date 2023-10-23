@@ -3,7 +3,7 @@
   lib ? pkgs.lib,
   ...
 }: {config}: let
-  neovimPlugins = pkgs.neovimPlugins;
+  inherit (pkgs) neovimPlugins;
 
   myNeovimUnwrapped = pkgs.neovim-unwrapped;
 
@@ -18,11 +18,11 @@
     };
   };
 
-  vim = vimOptions.config.vim;
+  inherit (vimOptions.config) vim;
 in
   pkgs.wrapNeovim myNeovimUnwrapped {
-    viAlias = vim.viAlias;
-    vimAlias = vim.vimAlias;
+    inherit (vim) viAlias;
+    inherit (vim) vimAlias;
     configure = {
       customRC = vim.configRC;
 

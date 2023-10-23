@@ -24,11 +24,11 @@ in {
     mkIf cfg.enable
     {
       vim.startPlugins = with pkgs.neovimPlugins;
-        if (cfg.gitsigns.enable)
+        if cfg.gitsigns.enable
         then [gitsigns-nvim]
         else [];
 
-      vim.luaConfigRC = mkIf (cfg.gitsigns.enable) ''
+      vim.luaConfigRC = mkIf cfg.gitsigns.enable ''
         -- GitSigns setup
         require('gitsigns').setup{
           on_attach = function(bufnr)

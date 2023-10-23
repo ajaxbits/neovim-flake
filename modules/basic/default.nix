@@ -115,8 +115,7 @@ in {
     };
   };
 
-  config = (
-    let
+  config = let
       writeIf = cond: msg:
         if cond
         then msg
@@ -147,7 +146,7 @@ in {
       vim.startPlugins = with pkgs.neovimPlugins; [plenary-nvim];
 
       vim.nmap =
-        if (cfg.disableArrows)
+        if cfg.disableArrows
         then {
           "<up>" = "<nop>";
           "<down>" = "<nop>";
@@ -157,7 +156,7 @@ in {
         else {};
 
       vim.imap =
-        if (cfg.disableArrows)
+        if cfg.disableArrows
         then {
           "<up>" = "<nop>";
           "<down>" = "<nop>";
@@ -168,12 +167,12 @@ in {
 
       vim.nnoremap =
         (
-          if (cfg.mapLeaderSpace)
+          if cfg.mapLeaderSpace
           then {"<space>" = "<nop>";}
           else {}
         )
         // (
-          if (cfg.escNohl)
+          if cfg.escNohl
           then {
             "<esc>" = ":nohl<CR><esc>";
           }
@@ -240,10 +239,10 @@ in {
         ${writeIf cfg.syntaxHighlighting ''
           syntax on
         ''}
-        ${writeIf (cfg.syntaxHighlighting == false) ''
+        ${writeIf (!cfg.syntaxHighlighting) ''
           syntax off
         ''}
-        ${writeIf (cfg.wordWrap == false) ''
+        ${writeIf (!cfg.wordWrap) ''
           set nowrap
         ''}
         ${writeIf cfg.hideSearchHighlight ''
@@ -255,6 +254,5 @@ in {
           set t_Co=256
         ''}
       '';
-    }
-  );
+    };
 }
