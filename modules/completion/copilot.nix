@@ -9,12 +9,7 @@ with builtins; let
   cfg = config.vim.autocomplete;
 in {
   config = mkIf cfg.copilot.enable (
-    let
-      writeIf = cond: msg:
-        if cond
-        then msg
-        else "";
-    in {
+    {
       vim.startPlugins = with pkgs.neovimPlugins;
         [copilot]
         ++ (

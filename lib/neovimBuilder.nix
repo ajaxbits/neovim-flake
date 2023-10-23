@@ -3,7 +3,6 @@
   lib ? pkgs.lib,
   ...
 }: {config}: let
-  inherit (pkgs) neovimPlugins;
 
   myNeovimUnwrapped = pkgs.neovim-unwrapped;
 

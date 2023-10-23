@@ -32,12 +32,7 @@ in {
   config =
     mkIf cfg.enable
     (
-      let
-        mkVimBool = val:
-          if val
-          then "1"
-          else "0";
-      in {
+      {
         vim.configRC = mkIf (cfg.name == "tokyonight") ''
           " need to set style before colorscheme to apply
           let g:${cfg.name}_style = "${cfg.style}"

@@ -14,12 +14,7 @@ in {
   };
 
   config = mkIf (cfg.enable && cfg.context.enable) (
-    let
-      writeIf = cond: msg:
-        if cond
-        then msg
-        else "";
-    in {
+    {
       vim.startPlugins = with pkgs.neovimPlugins; [
         nvim-treesitter-context
       ];
