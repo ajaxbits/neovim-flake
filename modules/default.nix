@@ -24,5 +24,6 @@
     ./telescope
     ./git
     ./surround
+    ./project-management
   ];
 }

@@ -420,6 +420,38 @@
         "type": "github"
       }
     },
+    "neovim-project": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1698264257,
+        "narHash": "sha256-As6ElCyTkIRbtEkmKEr/8cvMAfGteT33zfa1u+w+SQk=",
+        "owner": "coffebar",
+        "repo": "neovim-project",
+        "rev": "2f6c183d86e83219a34a3f2553ddbbb918574c4d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "coffebar",
+        "repo": "neovim-project",
+        "type": "github"
+      }
+    },
+    "neovim-session-manager": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696875507,
+        "narHash": "sha256-WOJQ6RIibOby+Pmzr6kQxcT2NCGrq1roWkh4QKJECks=",
+        "owner": "shatur",
+        "repo": "neovim-session-manager",
+        "rev": "68dde355a4304d83b40cf073f53915604bdd8e70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shatur",
+        "repo": "neovim-session-manager",
+        "type": "github"
+      }
+    },
     "nil": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -805,6 +837,8 @@
         "lspsaga": "lspsaga",
         "lualine": "lualine",
         "lualine-lsp-progress": "lualine-lsp-progress",
+        "neovim-project": "neovim-project",
+        "neovim-session-manager": "neovim-session-manager",
         "nil": "nil",
         "nixpkgs": "nixpkgs_2",
         "null-ls": "null-ls",

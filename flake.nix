@@ -228,6 +228,16 @@
       flake = false;
     };
 
+    # Session management
+    neovim-project = {
+      url = "github:coffebar/neovim-project";
+      flake = false;
+    };
+    neovim-session-manager = {
+      url = "github:shatur/neovim-session-manager";
+      flake = false;
+    };
+
     # Markdown
     glow-nvim = {
       url = "github:ellisonleao/glow.nvim";
@@ -289,6 +299,8 @@
         "lspsaga"
         "lualine"
         "lualine-lsp-progress"
+        "neovim-session-manager"
+        "neovim-project"
         "nui"
         "null-ls"
         "nvim-autopairs"
@@ -339,6 +351,7 @@
           vim.viAlias = true;
           vim.vimAlias = true;
           vim.lineNumberMode = "number";
+          vim.project-management.enable = true;
           vim.lsp = {
             enable = true;
             formatOnSave = true;
@@ -392,7 +405,7 @@
           vim.autocomplete = {
             enable = true;
             type = "nvim-cmp";
-            copilot.enable = true;
+            copilot.enable = false;
           };
           vim.filetree.nvimTreeLua = {
             enable = true;
