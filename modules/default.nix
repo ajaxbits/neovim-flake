@@ -18,7 +18,6 @@
     ./treesitter
     ./tidal
     ./autopairs
-    ./snippets
     ./keys
     ./markdown
     ./telescope
