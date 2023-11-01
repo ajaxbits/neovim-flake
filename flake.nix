@@ -228,13 +228,17 @@
       flake = false;
     };
 
-    # Session management
+    # IDE management
     neovim-project = {
       url = "github:coffebar/neovim-project";
       flake = false;
     };
     neovim-session-manager = {
       url = "github:shatur/neovim-session-manager";
+      flake = false;
+    };
+    auto-save-nvim = {
+      url = "github:pocco81/auto-save.nvim";
       flake = false;
     };
 
@@ -274,6 +278,7 @@
     flake-utils.lib.eachSystem configuredSystems (system: let
       # Plugin must be same as input name
       plugins = [
+        "auto-save-nvim"
         "bufdelete-nvim"
         "chatgpt"
         "cmp-buffer"
@@ -351,7 +356,10 @@
           vim.viAlias = true;
           vim.vimAlias = true;
           vim.lineNumberMode = "number";
-          vim.project-management.enable = true;
+          vim.project-management = {
+            enable = true;
+            autosave.enable = true;
+          };
           vim.lsp = {
             enable = true;
             formatOnSave = true;

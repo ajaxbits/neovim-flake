@@ -8,6 +8,8 @@ with lib;
 with builtins; let
   cfg = config.vim.project-management;
 in {
+  imports = [./autosave.nix];
+
   options.vim = {
     project-management = {
       enable = mkOption {
