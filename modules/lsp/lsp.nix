@@ -123,7 +123,6 @@ in {
         }
       '';
       vim.luaConfigRC = ''
-
         local attach_keymaps = function(client, bufnr)
           local opts = { noremap=true, silent=true }
 
@@ -140,6 +139,13 @@ in {
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+
+          -- taken from https://github.com/astral-sh/ruff-lsp
+          local bufopts = { noremap=true, silent=true, buffer=bufnr }
+
+          vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+          vim.keymap.set('n', '<space>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
         end
 
         local null_ls = require("null-ls")
@@ -281,6 +287,18 @@ in {
 
         ${writeIf cfg.python.enable ''
           -- Python config
+          lspconfig.ruff_lsp.setup{
+            on_attach=function(client, bufnr)
+              client.server_capabilities.hoverProvider = false
+              attach_keymaps(client, bufnr)
+             ${
+            if cfg.python.format
+            then "format_callback(client, bufnr)"
+            else ""
+          }
+            end,
+            cmd = {"${pkgs.python311Packages.ruff-lsp}/bin/ruff-lsp"}
+          }
           lspconfig.pyright.setup{
             capabilities = capabilities;
             on_attach=${
@@ -288,6 +306,19 @@ in {
             then "default_on_attach"
             else "no_format_on_attach"
           },
+            settings = {
+              pyright = {
+                autoImportCompletion = true,
+                disableOrganizeImports = true,
+              },
+              python = {
+                analysis = {
+                  autoSearchPaths = true,
+                  diagnosticMode = "openFilesOnly",
+                  useLibraryCodeForTypes = true
+                }
+              }
+            },
             cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
           }
         ''}
@@ -327,6 +358,7 @@ in {
 
         ${writeIf cfg.nix ''
           -- Nix config
+          -- TODO: change to nixd
           lspconfig.nil_ls.setup{
             capabilities = capabilities;
             on_attach = function(client, bufnr)
