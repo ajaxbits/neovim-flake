@@ -372,7 +372,7 @@
             nix = true;
             rust.enable = isMaximal;
             python.enable = isMaximal;
-            python.format = true;
+            python.format = pkgs.system != "aarch64-darwin";
             bash.enable = isMaximal;
             terraform.enable = isMaximal;
             terraform.lint = isMaximal;
