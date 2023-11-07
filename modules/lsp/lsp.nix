@@ -300,16 +300,9 @@ in {
             cmd = {"${pkgs.python311Packages.ruff-lsp}/bin/ruff-lsp"}
           }
           lspconfig.pyright.setup{
-            capabilities = capabilities;
-            on_attach=${
-            if cfg.python.format
-            then "default_on_attach"
-            else "no_format_on_attach"
-          },
             settings = {
               pyright = {
-                autoImportCompletion = true,
-                disableOrganizeImports = true,
+                disableLanguageServices = true,
               },
               python = {
                 analysis = {
