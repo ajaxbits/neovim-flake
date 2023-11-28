@@ -263,6 +263,10 @@
       url = "github:ruifm/gitlinker.nvim";
       flake = false;
     };
+    diffview-nvim = {
+      url = "github:sindrets/diffview.nvim";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -289,6 +293,7 @@
         "copilot"
         "copilot-cmp"
         "crates-nvim"
+        "diffview-nvim"
         "gitlinker-nvim"
         "gitsigns-nvim"
         "glow-nvim"
@@ -454,6 +459,7 @@
             gitsigns.enable = true;
             lazygit.enable = true;
             gitlinker.enable = true;
+            diffview.enable = true;
           };
         };
       };

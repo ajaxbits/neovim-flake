@@ -9,5 +9,6 @@
     ./git.nix
     ./lazygit.nix
     ./gitlinker.nix
+    ./diffview.nix
   ];
 }
