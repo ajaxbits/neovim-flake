@@ -153,12 +153,9 @@ in {
         local null_methods = require("null-ls.methods")
 
         local ls_sources = {
-          ${writeIf cfg.python.format
-          ''
-            null_ls.builtins.formatting.black.with({
-              command = "${pkgs.black}/bin/black",
-            }),
-          ''}
+          null_ls.builtins.formatting.black.with({
+            command = "${pkgs.black}/bin/black",
+          }),
           ${writeIf (config.vim.git.enable && config.vim.git.gitsigns.enable) ''
           null_ls.builtins.code_actions.gitsigns,
         ''}
@@ -301,9 +298,9 @@ in {
           }
           lspconfig.pyright.setup{
             settings = {
-              pyright = {
-                disableLanguageServices = true,
-              },
+              -- pyright = {
+                -- disableLanguageServices = true,
+              -- },
               python = {
                 analysis = {
                   autoSearchPaths = true,
