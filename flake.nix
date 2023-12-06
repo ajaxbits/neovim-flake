@@ -377,6 +377,7 @@
           vim.viAlias = true;
           vim.vimAlias = true;
           vim.lineNumberMode = "number";
+          vim.telescope.enable = true;
           vim.project-management = {
             enable = true;
             autosave.enable = true;
