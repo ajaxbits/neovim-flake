@@ -19,7 +19,6 @@ in {
 
     vim.nnoremap =
       {
-        "<silent><leader>lf" = "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>";
         "<silent><leader>lh" = "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>";
         "<silent><C-f>" = "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>";
         "<silent><C-b>" = "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>";

@@ -1,11 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     # WARN: Order matters here, if you can believe it...
+    ./treesitter
     ./completion
     ./theme
     ./core
@@ -15,7 +11,6 @@
     ./filetree
     ./visuals
     ./lsp
-    ./treesitter
     ./tidal
     ./autopairs
     ./snippets
@@ -25,5 +20,6 @@
     ./git
     ./surround
     ./project-management
+    ./leetcode
   ];
 }

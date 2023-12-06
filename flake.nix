@@ -1,7 +1,7 @@
 {
   description = "Alex's Neovim Configuration";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/23.11";
     flake-utils.url = "github:numtide/flake-utils";
 
     # LSP plugins
@@ -267,6 +267,20 @@
       url = "github:sindrets/diffview.nvim";
       flake = false;
     };
+
+    # other
+    leetcode = {
+      url = "github:kawre/leetcode.nvim";
+      flake = false;
+    };
+    nvim-notify = {
+      url = "github:rcarriga/nvim-notify";
+      flake = false;
+    };
+    nui = {
+      url = "github:MunifTanjim/nui.nvim";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -304,6 +318,7 @@
         "leap"
         "leap-ast"
         "leap-spooky"
+        "leetcode"
         "lsp-signature"
         "lspkind"
         "lspsaga"
@@ -321,6 +336,7 @@
         "nvim-cursorline"
         "nvim-lightbulb"
         "nvim-lspconfig"
+        "nvim-notify"
         "nvim-surround"
         "nvim-tree-lua"
         "nvim-treesitter"
@@ -448,7 +464,6 @@
             vsnip.enable = true;
             chatgpt.enable = false;
           };
-          vim.telescope = {enable = true;};
           vim.markdown = {
             enable = true;
             glow.enable = false;
@@ -492,6 +507,81 @@
           vim.git.enable = false;
         };
       };
+
+      leetcodeConfig = {
+        config = {
+          vim.leetcode = {
+            enable = true;
+            language = "rust";
+          };
+          vim.viAlias = false;
+          vim.vimAlias = false;
+          vim.lineNumberMode = "number";
+          vim.lsp = {
+            enable = true;
+            formatOnSave = false;
+            lightbulb.enable = true;
+            lspsaga.enable = false;
+            nvimCodeActionMenu.enable = true;
+            trouble.enable = true;
+            todo-comments.enable = true;
+            lspSignature.enable = true;
+            nix = true;
+            rust.enable = true;
+            python.enable = true;
+            python.format = false;
+            go = true;
+          };
+          vim.visuals = {
+            enable = true;
+            nvimWebDevicons.enable = true;
+            lspkind.enable = true;
+            indentBlankline = {
+              enable = true;
+              fillChar = "";
+              eolChar = "";
+              showCurrContext = true;
+            };
+            cursorWordline = {
+              enable = true;
+              lineTimeout = 0;
+            };
+          };
+          vim.statusline.lualine = {
+            enable = true;
+            theme = "gruvbox";
+            icons = true;
+            lsp-progress = true;
+          };
+          vim.theme = {
+            enable = true;
+            name = "gruvbox";
+          };
+          vim.autopairs.enable = true;
+          vim.surround.enable = true;
+          vim.autocomplete = {
+            enable = true;
+            type = "nvim-cmp";
+            copilot.enable = false;
+          };
+          vim.filetree.nvimTreeLua.enable = false;
+          vim.tabline.nvimBufferline.enable = false;
+          vim.syntaxHighlighting = true;
+          vim.keys = {
+            enable = true;
+            leap = {
+              enable = true;
+              ast = true;
+              spooky = true;
+            };
+            kommentary.enable = true;
+          };
+          vim.snippets = {
+            vsnip.enable = true;
+            chatgpt.enable = false;
+          };
+        };
+      };
     in rec {
       apps = rec {
         nvim = flake-utils.lib.mkApp {
@@ -525,6 +615,36 @@
             buildCommand = ''
               mkdir -p $out/bin
               ln -s ${origPackage}/bin/nvim $out/bin/${newBinName}
+            '';
+          };
+        leetcode = let
+          origPackage = neovimBuilder leetcodeConfig;
+          newBinName = "leetcode";
+        in
+          pkgs.stdenv.mkDerivation {
+            name = newBinName;
+            nativeBuildInputs = with pkgs; [makeWrapper pkg-config];
+            buildInputs = [origPackage];
+            buildCommand = ''
+              mkdir -p $out/bin
+              cat > $out/bin/${newBinName} <<EOF
+              #!/usr/bin/env sh
+              RUST_SRC_PATH=${pkgs.rust.packages.stable.rustPlatform.rustLibSrc} \
+                ${origPackage}/bin/nvim leetcode.nvim
+              EOF
+
+              chmod +x $out/bin/${newBinName}
+
+              wrapProgram $out/bin/${newBinName} \
+                --prefix PATH : ${pkgs.lib.makeBinPath [
+                pkgs.cargo
+                pkgs.rustc
+                pkgs.gcc
+                pkgs.clippy
+                pkgs.rustfmt
+                pkgs.rust-analyzer
+              ]} \
+                --prefix RUST_SRC_PATH : ${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}
             '';
           };
       };

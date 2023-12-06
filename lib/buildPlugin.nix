@@ -4,7 +4,7 @@
   plugins,
   ...
 }: final: prev: let
-  inherit (prev.vimUtils) buildVimPluginFrom2Nix;
+  inherit (prev.vimUtils) buildVimPlugin;
 
   treesitterGrammars = prev.tree-sitter.withPlugins (p: [
     p.tree-sitter-c
@@ -27,7 +27,7 @@
   ]);
 
   buildPlug = name:
-    buildVimPluginFrom2Nix {
+    buildVimPlugin {
       pname = name;
       version = "master";
       src = builtins.getAttr name inputs;
