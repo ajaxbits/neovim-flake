@@ -34,6 +34,29 @@
       flake = false;
     };
 
+    # Debugging
+    nvim-dap= {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
+    nvim-dap-ui = {
+      url = "github:rcarriga/nvim-dap-ui";
+      flake = false;
+    };
+    nvim-dap-virtual-text = {
+      url = "github:thehamsta/nvim-dap-virtual-text";
+      flake = false;
+    };
+    telescope-dap-nvim = {
+      url = "github:nvim-telescope/telescope-dap.nvim";
+      flake = false;
+    };
+    # Debugging::Languages
+    nvim-dap-python= {
+      url = "github:mfussenegger/nvim-dap-python";
+      flake = false;
+    };
+
     nvim-code-action-menu = {
       url = "github:weilbith/nvim-code-action-menu";
       flake = false;
@@ -319,13 +342,13 @@
         "leap-ast"
         "leap-spooky"
         "leetcode"
-        "lsp-signature"
         "lspkind"
         "lspsaga"
+        "lsp-signature"
         "lualine"
         "lualine-lsp-progress"
-        "neovim-session-manager"
         "neovim-project"
+        "neovim-session-manager"
         "nui"
         "null-ls"
         "nvim-autopairs"
@@ -334,6 +357,10 @@
         "nvim-code-action-menu"
         "nvim-compe"
         "nvim-cursorline"
+        "nvim-dap"
+        "nvim-dap-python"
+        "nvim-dap-ui"
+        "nvim-dap-virtual-text"
         "nvim-lightbulb"
         "nvim-lspconfig"
         "nvim-notify"
@@ -348,6 +375,7 @@
         "rust-tools"
         "sqls-nvim"
         "telescope"
+        "telescope-dap-nvim"
         "todo-comments"
         "tokyonight"
         "trouble"
