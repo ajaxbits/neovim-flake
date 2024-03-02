@@ -11,7 +11,6 @@
     ./filetree
     ./visuals
     ./lsp
-    ./tidal
     ./autopairs
     ./snippets
     ./keys
